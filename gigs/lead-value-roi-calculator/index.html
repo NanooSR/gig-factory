@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lead Value ROI Calculator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="hero">
+        <p class="eyebrow">CUSTOMIZATION READY MINI-SITE</p>
+        <h1>Lead Value & ROI Calculator</h1>
+        <p id="subtitle">Built for freelancers and small businesses to quickly estimate campaign profitability before spending ad dollars.</p>
+
+        <div class="copy-grid">
+          <label>
+            Brand Name
+            <input id="brand-name" value="Your Agency" />
+          </label>
+          <label>
+            Contact Email
+            <input id="brand-email" type="email" value="hello@yourbrand.com" />
+          </label>
+          <label>
+            CTA Text
+            <input id="cta-text" value="Book a growth call" />
+          </label>
+        </div>
+      </header>
+
+      <section class="card">
+        <h2>Campaign assumptions</h2>
+
+        <label>
+          Monthly website leads
+          <input id="monthly-leads" type="number" min="0" value="120" />
+        </label>
+
+        <label>
+          Lead-to-qualification rate (%)
+          <input id="qualification-rate" type="number" min="0" max="100" step="0.1" value="22" />
+        </label>
+
+        <label>
+          Qualification-to-client conversion (%)
+          <input id="close-rate" type="number" min="0" max="100" step="0.1" value="8" />
+        </label>
+
+        <label>
+          Average revenue per new client (CAD)
+          <input id="revenue-per-client" type="number" min="0" step="5" value="900" />
+        </label>
+
+        <label>
+          Average client margin (%)
+          <input id="gross-margin" type="number" min="0" max="100" step="0.5" value="45" />
+        </label>
+
+        <label>
+          Monthly ad spend (CAD)
+          <input id="ad-spend" type="number" min="0" step="10" value="1800" />
+        </label>
+
+        <label>
+          Estimated LTV uplift from retention (%)
+          <input id="ltv-uplift" type="number" min="0" max="200" step="1" value="30" />
+        </label>
+
+        <button id="calculate" type="button">Run ROI calculation</button>
+      </section>
+
+      <section class="card result" aria-live="polite">
+        <h2>Result</h2>
+        <p id="status-line">Enter values and click run to see your forecast.</p>
+
+        <div id="results" class="hidden">
+          <p><strong>Qualified leads:</strong> <span id="qualified-leads">0</span></p>
+          <p><strong>New clients/month:</strong> <span id="new-clients">0</span></p>
+          <p><strong>Estimated gross profit/month:</strong> <span id="monthly-profit">$0</span></p>
+          <p><strong>Break-even clients needed:</strong> <span id="break-even">0</span></p>
+          <p><strong>ROI on ad spend:</strong> <span id="roi">0%</span></p>
+          <p><strong>Lead cost:</strong> <span id="cost-per-lead">$0</span></p>
+          <p id="interpretation"></p>
+        </div>
+
+        <a id="cta" class="cta" href="#">Book a campaign audit</a>
+
+        <p class="hint">Tip: this is best used in sales calls to quickly test price, conversion, and margin scenarios.</p>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

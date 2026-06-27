@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Local Service Quote Calculator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <p class="eyebrow">CUSTOMIZATION READY MINI-SITE</p>
+        <h1 id="gig-title">Local Service Quote Calculator</h1>
+        <p class="intro" id="gig-subhead">
+          Turn service details into an instant, client-ready estimate for cleaners, landscapers, movers,
+          electricians, and other local businesses.
+        </p>
+
+        <div class="brand-panel" aria-label="Brand and copy settings">
+          <h2>Editable branding</h2>
+          <div class="brand-grid">
+            <label>
+              Brand Name
+              <input id="brand-name" type="text" value="Your Service Business" />
+            </label>
+            <label>
+              Contact Email
+              <input id="brand-email" type="email" value="hello@yourdomain.com" />
+            </label>
+            <label>
+              Primary CTA
+              <input id="brand-cta" type="text" value="Get your custom quote" />
+            </label>
+          </div>
+          <p class="brand-note">Change these fields and copy in <code>index.html</code> to match your client brand.</p>
+        </div>
+      </header>
+
+      <main class="content-grid">
+        <section class="panel" id="form-panel">
+          <h2>Build your quote</h2>
+          <p class="panel-subhead">Adjust the inputs your lead gave you in the intake call.</p>
+
+          <label>
+            Service Type
+            <select id="service-type">
+              <option value="260">Residential Cleaning (standard visit)</option>
+              <option value="420">Deep Cleaning / move-out cleaning</option>
+              <option value="330">Landscaping trim + maintenance</option>
+              <option value="550">Interior move-in / move-out setup</option>
+              <option value="480">Electrical repair package (small jobs)</option>
+              <option value="390">General handyman visit</option>
+            </select>
+          </label>
+
+          <label>
+            Estimated labor hours
+            <input id="hours" type="number" min="1" step="1" value="4" />
+          </label>
+
+          <label>
+            Hourly labor rate
+            <input id="hourly-rate" type="number" min="20" step="5" value="85" />
+          </label>
+
+          <label>
+            Team size
+            <select id="team-size">
+              <option value="1">1 technician</option>
+              <option value="1.2">2 technicians</option>
+              <option value="1.35">3-4 technicians</option>
+            </select>
+          </label>
+
+          <label>
+            Urgency
+            <select id="urgency">
+              <option value="1">Standard (within 2 weeks)</option>
+              <option value="1.12">Priority (3-7 days)</option>
+              <option value="1.22">Rush (48 hours)</option>
+            </select>
+          </label>
+
+          <fieldset>
+            <legend>Optional add-ons</legend>
+            <label><input type="checkbox" class="addon" data-cost="95" /> Same-day scheduling hold</label>
+            <label><input type="checkbox" class="addon" data-cost="120" /> Follow-up cleanup / touch-ups</label>
+            <label><input type="checkbox" class="addon" data-cost="180" /> Materials and supplies included</label>
+            <label><input type="checkbox" class="addon" data-cost="70" /> Post-service report</label>
+            <label><input type="checkbox" class="addon" data-cost="150" /> Travel zone surcharge</label>
+          </fieldset>
+
+          <label>
+            Estimated materials / permit costs
+            <input id="materials" type="number" min="0" step="5" value="40" />
+          </label>
+
+          <button id="calculate" type="button">Calculate my quote</button>
+        </section>
+
+        <section class="panel result-card" aria-live="polite">
+          <h2>Quote breakdown</h2>
+          <p id="client-message">Enter job details to generate a proposal total.</p>
+
+          <div id="breakdown" class="hidden">
+            <p><strong>Subtotal:</strong> <span id="subtotal">$0</span></p>
+            <p><strong>Taxes / contingency (placeholder):</strong> <span id="tax">$0</span></p>
+            <p class="total-row"><strong>Total estimate:</strong> <span id="total">$0</span></p>
+            <p id="band" class="muted"></p>
+            <a id="cta" class="cta-button" href="#">Email estimate to lead</a>
+            <p class="fine-print">Suggested deposit: <strong id="deposit">$0</strong> · Suggested completion window: <span id="eta">—</span></p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
