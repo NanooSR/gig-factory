@@ -1,0 +1,11 @@
+# Local continuity database artifacts
+.hermes/continuity/*.sqlite3
+.hermes/continuity/*.sqlite3-shm
+.hermes/continuity/*.sqlite3-wal
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Vercel local metadata
+.vercel/

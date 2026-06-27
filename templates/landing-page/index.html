@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LaunchFast</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <nav class="nav">
+      <div class="brand">LaunchFast</div>
+      <a class="cta secondary" href="#contact">Book a Call</a>
+    </nav>
+    <div class="hero-content">
+      <p class="eyebrow">Fast websites for growing businesses</p>
+      <h1>Get a high-converting landing page shipped this week.</h1>
+      <p class="sub">Ideal for founders, agencies, local businesses, and creators who need something polished without waiting on a full dev cycle.</p>
+      <div class="hero-actions">
+        <a class="cta" href="#contact">Start Your Project</a>
+        <a class="link-btn" href="#features">See Features</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="features" class="section grid-3">
+      <article class="card"><h2>Fast Turnaround</h2><p>Launch quickly with a proven structure and polished UI.</p></article>
+      <article class="card"><h2>Mobile Ready</h2><p>Looks sharp on phones, tablets, and desktops.</p></article>
+      <article class="card"><h2>Clear CTA</h2><p>Every section pushes visitors toward the next step.</p></article>
+    </section>
+
+    <section class="section testimonial">
+      <blockquote>“We got a clean live page in under 48 hours and started collecting leads immediately.”</blockquote>
+      <p>— Sample client testimonial</p>
+    </section>
+
+    <section class="section faq">
+      <h2>FAQ</h2>
+      <details><summary>How fast can this launch?</summary><p>Usually within 1–3 days depending on revisions and content readiness.</p></details>
+      <details><summary>Can this match my brand?</summary><p>Yes. Swap colors, copy, logo, and visuals to fit the client.</p></details>
+      <details><summary>Can I add a form?</summary><p>Yes. This starter already includes a simple lead form below.</p></details>
+    </section>
+
+    <section id="contact" class="section contact">
+      <h2>Start your project</h2>
+      <form id="lead-form" class="card form-card">
+        <input type="text" name="name" placeholder="Your name" required />
+        <input type="email" name="email" placeholder="Your email" required />
+        <textarea name="message" placeholder="Tell us what you need" required></textarea>
+        <button class="cta" type="submit">Send Request</button>
+        <p id="form-status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

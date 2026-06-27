@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Hermes Controlled Chrome</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; background: #111827; color: #f9fafb; }
+    .card { max-width: 900px; margin: 0 auto; background: #1f2937; padding: 24px; border-radius: 12px; }
+    code { background: #374151; padding: 2px 6px; border-radius: 4px; }
+    a { color: #93c5fd; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Hermes Controlled Chrome</h1>
+    <p>This Chrome window is the dedicated Hermes CDP browser. Use this window/profile for GitHub, Vercel, and other browser-authenticated automation that Hermes should resume later.</p>
+    <ul>
+      <li>CDP endpoint: <code>http://127.0.0.1:9222</code></li>
+      <li>Dedicated profile dir: <code>C:/Users/Ryan/AppData/Local/hermes/browser-profiles/cdp-chrome</code></li>
+      <li>Launcher: <code>C:/Users/Ryan/gig-factory/scripts/browser/launch-hermes-chrome.cmd</code></li>
+      <li>Continuity DB: <code>C:/Users/Ryan/gig-factory/.hermes/continuity/gig_factory_continuity.sqlite3</code></li>
+    </ul>
+    <p>Manual actions that may still be needed:</p>
+    <ol>
+      <li>Sign into GitHub in this exact window.</li>
+      <li>Sign into Vercel with GitHub in this exact window if deployment work is needed.</li>
+      <li>Return to Hermes and start a fresh session if the current one cannot adopt new browser config.</li>
+    </ol>
+    <p>Latest handoff doc: <code>C:/Users/Ryan/gig-factory/docs/continuity/latest-handoff.md</code></p>
+    <p>Generated: 2026-06-27T03:07:34.967079+00:00</p>
+  </div>
+</body>
+</html>

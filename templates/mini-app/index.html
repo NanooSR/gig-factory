@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quote Calculator</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <section class="panel">
+      <h1>Project Quote Calculator</h1>
+      <p>Turn a client brief into a rough estimate in seconds.</p>
+      <label>Project Type
+        <select id="projectType">
+          <option value="100">Landing Page</option>
+          <option value="220">Mini App</option>
+          <option value="280">Browser Game</option>
+        </select>
+      </label>
+      <label>Rush Delivery
+        <select id="rush">
+          <option value="0">No</option>
+          <option value="75">Yes</option>
+        </select>
+      </label>
+      <label>Extra Revisions
+        <input id="revisions" type="number" min="0" value="0" />
+      </label>
+      <button id="calculateBtn">Calculate</button>
+      <div id="result" class="result">Estimate: $100</div>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
