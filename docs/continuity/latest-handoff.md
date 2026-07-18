@@ -55,3 +55,32 @@ Dedicated visible Chrome CDP browser is configured and verified at http://127.0.
 ## Remaining manual/project actions
 - Set git identity before committing/pushing.
 - Create/select the intended GitHub repo/remote for this project only.
+
+## 2026-07-18 — Vercel gig-factory live gig publish
+
+Ryan pointed out the Vercel website account contains gigs. Verified Vercel project `the-wathers-edge/gig-factory` was production-deploying only `templates/landing-page` from `main` at old commit `6105d16`, so the 3 gig deliverables under `/gigs/` were not live and the public homepage still showed a generic LaunchFast landing page with no product screenshots.
+
+Completed safe fix:
+- Preserved TWEStore autonomous automation disabled/manual; no billing, paid ads, domain, or Vercel plan changes.
+- Added the 3 mini-site gigs into the Vercel production root under `templates/landing-page/gigs/`.
+- Generated real desktop/mobile output-state screenshots for each gig and served them from `templates/landing-page/assets/screenshots/gigs/`.
+- Rebuilt the Vercel homepage into a Gig Factory index with 3 gig cards, actual product screenshots, and links to each working demo.
+- Added screenshot proof assets under `docs/assets/screenshots/gigs/` and committed/pushed to GitHub `main`.
+- Commit: `02b2708c94857d3658001321e651265b53503666` (`feat: publish gig demos with live screenshots`).
+- Vercel dashboard verified new production deployment Ready for commit `02b2708`.
+- Live cache-busted verification passed on `https://gig-factory-navy.vercel.app/?v=02b2708` and all 3 gig routes:
+  - `/gigs/lead-value-roi-calculator/`
+  - `/gigs/local-service-quote-calculator/`
+  - `/gigs/website-audit-scorecard/`
+- Live verification confirmed homepage has 3 gig cards and 3 screenshot images; every gig route has 2 real screenshot images with nonzero natural dimensions.
+
+Key public URLs:
+- `https://gig-factory-navy.vercel.app/`
+- `https://gig-factory-navy.vercel.app/gigs/lead-value-roi-calculator/`
+- `https://gig-factory-navy.vercel.app/gigs/local-service-quote-calculator/`
+- `https://gig-factory-navy.vercel.app/gigs/website-audit-scorecard/`
+
+Evidence:
+- Generator/publish script: `scripts/publish_gigs_to_landing_page.py`
+- Screenshot contact sheet: `docs/assets/screenshots/gigs/gig-factory-desktop-contact-sheet.jpg`
+- Vercel dashboard readback: production deployment `feat: publish gig demos with live screenshots`, status `Ready`, commit `02b2708`, branch `main`.
