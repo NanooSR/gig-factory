@@ -34,7 +34,7 @@ function updateScore() {
     const value = Number(slider.value);
     sliderData[key] = value;
     total += value;
-    if (value <= 2) {
+    if (value <= 3) {
       lowScorers.push(key);
     }
   });
@@ -63,7 +63,9 @@ function updateScore() {
 
   if (lowScorers.length === 0) {
     const li = document.createElement('li');
-    li.textContent = 'Great job — all core areas are strong. Consider A/B testing hero variants for growth.';
+    li.textContent = total >= 40
+      ? 'Great job — all core areas are strong. Consider A/B testing hero variants for growth.'
+      : 'No severe single-area failure detected, but the total score still needs stronger proof, clearer CTA flow, and trust signals before calling the page launch-ready.';
     fixList.appendChild(li);
   }
 

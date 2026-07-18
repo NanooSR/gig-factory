@@ -22,13 +22,13 @@ const brandEmailEl = document.getElementById('brand-email');
 const gigTitle = document.getElementById('gig-title');
 const messageEl = document.getElementById('client-message');
 
-const taxRate = 0.072;
+const planningBufferRate = 0.072;
 const currency = new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' });
 
 function calculateTotal() {
   const base = Number(serviceType.value);
-  const laborHours = Number(hours.value || 0);
-  const laborRate = Number(hourlyRate.value || 0);
+  const laborHours = Math.max(0, Number(hours.value || 0));
+  const laborRate = Math.max(0, Number(hourlyRate.value || 0));
   const team = Number(teamSize.value);
   const urgencyMultiplier = Number(urgency.value);
   const materialsCost = Number(materials.value || 0);
@@ -39,8 +39,8 @@ function calculateTotal() {
 
   const laborCost = laborHours * laborRate;
   const subtotalBeforeTax = (base + laborCost + materialsCost + addOns) * team * urgencyMultiplier;
-  const taxes = subtotalBeforeTax * taxRate;
-  const total = subtotalBeforeTax + taxes;
+  const planningBuffer = subtotalBeforeTax * planningBufferRate;
+  const total = subtotalBeforeTax + planningBuffer;
 
   const deposit = Math.round(total * 0.35);
   const eta = urgencyMultiplier > 1.2
@@ -59,23 +59,26 @@ function calculateTotal() {
   const brandName = brandNameEl.value.trim() || 'Your Business';
 
   subtotalEl.textContent = currency.format(Math.round(subtotalBeforeTax));
-  taxEl.textContent = currency.format(Math.round(taxes));
+  taxEl.textContent = currency.format(Math.round(planningBuffer));
   totalEl.textContent = currency.format(Math.round(total));
   depositEl.textContent = currency.format(deposit);
   bandEl.textContent = band;
   etaEl.textContent = eta;
-  messageEl.textContent = `${brandName} quote generated. Paste this in a proposal email.`;
+  const estimateIsUsable = laborHours > 0 && laborRate > 0;
+  messageEl.textContent = estimateIsUsable
+    ? `${brandName} quote generated. Paste this in a proposal email.`
+    : 'Add positive labor hours and hourly rate before treating this as a usable quote.';
 
   const subject = `Quote request from ${brandName}`;
   const body = [
     `Estimated service: ${serviceType.options[serviceType.selectedIndex].text}`,
     `Labor: ${laborHours}h @ $${laborRate}/h`,
     `Subtotal before tax: ${currency.format(Math.round(subtotalBeforeTax))}`,
-    `Estimated tax/contingency: ${currency.format(Math.round(taxes))}`,
+    `Estimated planning buffer: ${currency.format(Math.round(planningBuffer))}`,
     `Total: ${currency.format(Math.round(total))}`,
     `Suggested deposit: ${currency.format(deposit)}`,
     `Projected turnaround: ${eta}`,
-    'Generated with Local Service Quote Calculator mini-site.'
+    'Generated with Local Service Quote Calculator mini-site. Final tax, permit, and travel rules should be confirmed by the service provider.'
   ].join('\n');
 
   ctaEl.href = `mailto:${encodeURIComponent(brandEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
