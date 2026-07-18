@@ -1,0 +1,157 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: linear-gradient(140deg, #111827, #1f2937);
+  color: #f8fafc;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px;
+  display: grid;
+  gap: 16px;
+}
+
+.hero, .card {
+  background: #f8fafc;
+  color: #0f172a;
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.hero {
+  background: linear-gradient(135deg, #2563eb, #0ea5e9);
+  color: #f8fafc;
+}
+
+h1,h2,p { margin: 0; }
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.brand-area,
+label {
+  display: grid;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.brand-area {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+label {
+  font-weight: 600;
+  font-size: .92rem;
+}
+
+input[type='range'] {
+  width: 100%;
+  accent-color: #2563eb;
+  height: 1.5rem;
+}
+
+input[type='text'],
+input[type='email'],
+button {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+fieldset {
+  border: 1px solid #dbeafe;
+  border-radius: 10px;
+  padding: 12px;
+  margin: 12px 0;
+}
+
+fieldset label {
+  margin: 8px 0;
+  font-size: .9rem;
+}
+
+button {
+  background: #2563eb;
+  border: none;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#score-output p {
+  padding: 8px 0;
+  border-bottom: 1px dashed #dbeafe;
+}
+
+#score-output ul {
+  margin: 8px 0 0 20px;
+  padding: 0;
+}
+
+.muted { color: #475569; }
+
+.hidden { display: none; }
+
+.cta {
+  display: inline-block;
+  text-decoration: none;
+  background: #0ea5e9;
+  color: #fff;
+  padding: 12px 14px;
+  border-radius: 10px;
+  margin-top: 10px;
+  font-weight: 700;
+}
+
+.result {
+  background: #eef2ff;
+}
+
+@media (max-width: 720px) {
+  .container { padding: 14px; }
+}
+
+
+.live-preview-gallery {
+  margin-top: 1.5rem;
+}
+
+.preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.preview-grid figure {
+  margin: 0;
+  padding: 0.75rem;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 18px;
+  background: rgba(15, 23, 42, 0.72);
+}
+
+.preview-grid img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  display: block;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.preview-grid figcaption {
+  margin-top: 0.55rem;
+  color: #cbd5e1;
+  font-size: 0.92rem;
+}

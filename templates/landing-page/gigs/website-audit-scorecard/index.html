@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Website Audit Scorecard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="hero">
+        <p class="eyebrow">CUSTOMIZATION READY MINI-SITE</p>
+        <h1>Website Audit Scorecard</h1>
+        <p>Help clients identify the 5 biggest improvement areas in under 90 seconds.</p>
+
+        <div class="brand-area">
+          <label>
+            Brand Name
+            <input id="brand-name" value="Your Brand" />
+          </label>
+          <label>
+            Contact Email
+            <input id="brand-email" type="email" value="hello@yourbrand.com" />
+          </label>
+          <label>
+            Offer CTA Text
+            <input id="cta-text" value="Order my website cleanup" />
+          </label>
+        </div>
+      </header>
+
+      <section class="card live-preview-gallery" aria-label="Actual product screenshots">
+        <p class="eyebrow">Actual product screenshots</p>
+        <h2>See the mini-site in use before you buy</h2>
+        <p>These are real captured states from the working static deliverable: desktop output and mobile output, not a generic title card.</p>
+        <div class="preview-grid">
+          <figure>
+            <img src="../../assets/screenshots/gigs/website-audit-scorecard-desktop-output.png" alt="Desktop screenshot of Website Audit Scorecard showing the live output state" />
+            <figcaption>Desktop output state</figcaption>
+          </figure>
+          <figure>
+            <img src="../../assets/screenshots/gigs/website-audit-scorecard-mobile-output.png" alt="Mobile screenshot of Website Audit Scorecard showing the live output state" />
+            <figcaption>Mobile output state</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Score your website readiness</h2>
+        <p class="muted">Rate each area from 0 (not present) to 5 (excellent).</p>
+
+        <form id="audit-form">
+          <fieldset>
+            <legend>1) Offer clarity</legend>
+            <label><span>Value proposition is clear in 1 line</span> <input type="range" min="0" max="5" value="3" data-label="value-prop" /></label>
+            <label><span>Primary CTA visible in first fold</span> <input type="range" min="0" max="5" value="3" data-label="cta-fold" /></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>2) Conversion structure</legend>
+            <label><span>Lead capture form / booking flow exists</span> <input type="range" min="0" max="5" value="3" data-label="lead-capture" /></label>
+            <label><span>Social proof and trust signals present</span> <input type="range" min="0" max="5" value="3" data-label="trust" /></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>3) Technical basics</legend>
+            <label><span>Mobile responsive across major screen sizes</span> <input type="range" min="0" max="5" value="3" data-label="mobile" /></label>
+            <label><span>Fast loading and optimized media</span> <input type="range" min="0" max="5" value="3" data-label="speed" /></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>4) Trust & content depth</legend>
+            <label><span>Page content answers common buyer questions</span> <input type="range" min="0" max="5" value="3" data-label="content" /></label>
+            <label><span>Contact details and policies easy to find</span> <input type="range" min="0" max="5" value="3" data-label="contact" /></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>5) Tracking</legend>
+            <label><span>Analytics + goal tracking in place</span> <input type="range" min="0" max="5" value="3" data-label="analytics" /></label>
+            <label><span>Retargeting/referral path present</span> <input type="range" min="0" max="5" value="3" data-label="retargeting" /></label>
+          </fieldset>
+
+          <button id="score-btn" type="button">Score this site</button>
+        </form>
+      </section>
+
+      <section class="card result" aria-live="polite">
+        <h2>Scorecard</h2>
+        <p id="score-text">Set the sliders and calculate a score.</p>
+        <div id="score-output" class="hidden">
+          <p><strong>Total Score:</strong> <span id="total-score">0</span>/50</p>
+          <p><strong>Performance band:</strong> <span id="score-band"></span></p>
+          <p><strong>Top fixes:</strong></p>
+          <ul id="fix-list"></ul>
+          <a id="cta" class="cta" href="#">Take the website audit offer</a>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
