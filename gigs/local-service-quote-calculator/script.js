@@ -7,6 +7,8 @@ const materials = document.getElementById('materials');
 const addonInputs = Array.from(document.querySelectorAll('.addon'));
 
 const resultCard = document.getElementById('breakdown');
+const laborSubtotalEl = document.getElementById('labor-subtotal');
+const fixedSubtotalEl = document.getElementById('fixed-subtotal');
 const subtotalEl = document.getElementById('subtotal');
 const taxEl = document.getElementById('tax');
 const totalEl = document.getElementById('total');
@@ -44,7 +46,9 @@ function calculateTotal() {
     .reduce((sum, input) => sum + Number(input.dataset.cost), 0);
 
   const laborCost = laborHours * laborRate;
-  const subtotalBeforeBuffer = (base + laborCost + materialsCost + addOns) * team * urgencyMultiplier;
+  const adjustedLaborCost = laborCost * team * urgencyMultiplier;
+  const fixedAndPassThroughCosts = base + materialsCost + addOns;
+  const subtotalBeforeBuffer = adjustedLaborCost + fixedAndPassThroughCosts;
   const planningBuffer = subtotalBeforeBuffer * planningBufferRate;
   const total = subtotalBeforeBuffer + planningBuffer;
 
@@ -56,10 +60,10 @@ function calculateTotal() {
       : '4-7 business days';
 
   const band = total >= 800
-    ? 'Professional package pricing tier'
+    ? 'Illustrative high-scope demo band — replace before customer use'
     : total >= 450
-      ? 'Starter-mid package pricing tier'
-      : 'Intro package pricing tier';
+      ? 'Illustrative mid-scope demo band — replace before customer use'
+      : 'Illustrative starter demo band — replace before customer use';
 
   const brandEmail = brandEmailEl.value.trim();
   const brandName = brandNameEl.value.trim() || 'Your Business';
@@ -72,24 +76,27 @@ function calculateTotal() {
     return;
   }
 
+  laborSubtotalEl.textContent = currency.format(Math.round(adjustedLaborCost));
+  fixedSubtotalEl.textContent = currency.format(Math.round(fixedAndPassThroughCosts));
   subtotalEl.textContent = currency.format(Math.round(subtotalBeforeBuffer));
   taxEl.textContent = currency.format(Math.round(planningBuffer));
   totalEl.textContent = currency.format(Math.round(total));
   depositEl.textContent = currency.format(deposit);
   bandEl.textContent = band;
   etaEl.textContent = eta;
-  messageEl.textContent = `${brandName} demo estimate generated. Review and replace the default pricing rules before sending this result to a customer.`;
+  messageEl.textContent = `${brandName} demo estimate generated. Illustrative demo only: replace and test the service rules, deposits, completion windows, taxes, materials, travel, and contract language before customer use.`;
 
   const subject = `Quote request from ${brandName}`;
   const body = [
     `Estimated service: ${serviceType.options[serviceType.selectedIndex].text}`,
     `Labor: ${laborHours}h @ $${laborRate}/h`,
-    `Subtotal before planning buffer: ${currency.format(Math.round(subtotalBeforeBuffer))}`,
-    `Estimated planning buffer: ${currency.format(Math.round(planningBuffer))}`,
+    `Labour subtotal after team/urgency: ${currency.format(Math.round(adjustedLaborCost))}`,
+    `Fixed service/add-on/pass-through costs: ${currency.format(Math.round(fixedAndPassThroughCosts))}`,
+    `Illustrative demo planning buffer: ${currency.format(Math.round(planningBuffer))}`,
     `Total: ${currency.format(Math.round(total))}`,
-    `Suggested deposit: ${currency.format(deposit)}`,
-    `Projected turnaround: ${eta}`,
-    'Generated with Local Service Quote Calculator mini-site. Final tax, permit, and travel rules should be confirmed by the service provider.'
+    `Illustrative demo deposit: ${currency.format(deposit)}`,
+    `Illustrative demo completion window: ${eta}`,
+    'Generated with Custom Service Estimate & Quote-Intake Calculator demo. Planning estimate only; not a binding quote. Final scope, taxes, permits, travel, materials, availability, and contract terms must be confirmed by the service provider.'
   ].join('\n');
 
   if (isUsablePreviewEmail(brandEmail)) {
@@ -107,7 +114,7 @@ function calculateTotal() {
 
 function updateBrand() {
   const brandName = brandNameEl.value.trim() || 'Your Service Business';
-  gigTitle.textContent = `${brandName} Quote Calculator`;
+  gigTitle.textContent = `${brandName} Estimate Calculator`; 
   ctaTextEl.value = ctaTextEl.value || 'Get your custom quote';
 }
 

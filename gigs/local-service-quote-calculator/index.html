@@ -3,16 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Local Service Quote Calculator</title>
+    <title>Custom Service Estimate & Quote-Intake Calculator</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="page">
       <header class="hero">
         <p class="eyebrow">LIVE DEMO MINI-SITE</p>
-        <h1 id="gig-title">Local Service Quote Calculator</h1>
+        <h1 id="gig-title">Custom Service Estimate & Quote-Intake Calculator</h1>
         <p class="intro" id="gig-subhead">
-          A working quote-builder mini-site for cleaners, landscapers, movers, electricians, and other local service businesses that need faster client estimates.
+          A branded planning-estimate demo built around one business’s approved services, rates, modifiers, surcharges, deposit rules, and follow-up flow. Demo values are illustrative and must be replaced and tested before customer use.
         </p>
 
         <div class="brand-panel" aria-label="Brand and copy settings">
@@ -31,24 +31,22 @@
               <input id="brand-cta" type="text" value="Get your custom quote" />
             </label>
           </div>
-          <p class="brand-note">These fields demonstrate how the delivered static mini-site can be customized for a buyer's own brand, contact email, and offer.</p>
+          <p class="brand-note">These fields demonstrate how a delivered static mini-site can be customized for one approved niche, brand, contact email, CTA, pricing logic, and non-binding estimate language.</p>
         </div>
       </header>
 
       <main class="content-grid">
         <section class="panel" id="form-panel">
-          <h2>Build your quote</h2>
-          <p class="panel-subhead">Adjust the inputs your lead gave you in the intake call.</p>
+          <h2>Build an illustrative planning estimate</h2>
+          <p class="panel-subhead">Adjust the demo inputs. A production build uses only the service provider’s written and approved pricing rules.</p>
 
           <label>
-            Service Type
+            Residential cleaning demo service
             <select id="service-type">
-              <option value="260">Residential Cleaning (standard visit)</option>
-              <option value="420">Deep Cleaning / move-out cleaning</option>
-              <option value="330">Landscaping trim + maintenance</option>
-              <option value="550">Interior move-in / move-out setup</option>
-              <option value="480">Electrical repair package (small jobs)</option>
-              <option value="390">General handyman visit</option>
+              <option value="260">Standard residential cleaning visit</option>
+              <option value="420">Deep cleaning / move-out cleaning</option>
+              <option value="180">Kitchen or bathroom add-on block</option>
+              <option value="95">Inside-fridge or inside-oven add-on</option>
             </select>
           </label>
 
@@ -90,7 +88,7 @@
           </fieldset>
 
           <label>
-            Estimated materials / permit costs
+            Estimated supplies or pass-through costs
             <input id="materials" type="number" min="0" step="5" value="40" />
           </label>
 
@@ -102,14 +100,20 @@
           <p id="client-message">Enter job details to generate a proposal total.</p>
 
           <div id="breakdown" class="hidden">
+            <p><strong>Labour subtotal after team/urgency:</strong> <span id="labor-subtotal">$0</span></p>
+            <p><strong>Fixed service/add-on/pass-through costs:</strong> <span id="fixed-subtotal">$0</span></p>
             <p><strong>Subtotal:</strong> <span id="subtotal">$0</span></p>
-            <p><strong>Estimated planning buffer:</strong> <span id="tax">$0</span></p>
+            <p><strong>Illustrative demo planning buffer:</strong> <span id="tax">$0</span></p>
             <p class="total-row"><strong>Total estimate:</strong> <span id="total">$0</span></p>
             <p id="band" class="muted"></p>
-            <a id="cta" class="cta-button" href="mailto:thewatchersedgestore@gmail.com?subject=Local%20Service%20Quote%20Calculator%20mini-site">Preview quote email</a>
-            <a class="seller-cta cta-button secondary" href="mailto:thewatchersedgestore@gmail.com?subject=Customization%20request%20-%20Local%20Service%20Quote%20Calculator">Ask TWEStore about customization</a>
-            <p class="fine-print">Suggested deposit: <strong id="deposit">$0</strong> · Suggested completion window: <span id="eta">—</span></p>
+            <a id="cta" class="cta-button" href="mailto:thewatchersedgestore@gmail.com?subject=Custom%20Service%20Estimate%20Quote-Intake%20Calculator%20demo">Preview quote email</a>
+            <a class="seller-cta cta-button secondary" href="mailto:thewatchersedgestore@gmail.com?subject=Customization%20request%20-%20Custom%20Service%20Estimate%20Quote-Intake%20Calculator">Ask TWEStore about customization</a>
+            <p class="fine-print">Illustrative demo deposit: <strong id="deposit">$0</strong> · Illustrative demo completion window: <span id="eta">—</span></p>
           </div>
+        </section>
+        <section class="panel">
+          <h2>Important demo boundary</h2>
+          <p class="fine-print">Planning estimate only; not a binding quote. Final scope, availability, taxes, permits, travel, materials, and contract terms are confirmed by the service provider. Team size and urgency apply only to approved labour components; flat fees, supplies, taxes, permits, travel, and pass-through costs remain separate unless the written pricing rules say otherwise.</p>
         </section>
       </main>
     </div>

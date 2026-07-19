@@ -3,15 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lead Value ROI Calculator</title>
+    <title>Custom Lead Value & Campaign Economics Calculator</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <main class="shell">
       <header class="hero">
         <p class="eyebrow">LIVE DEMO MINI-SITE</p>
-        <h1>Lead Value & ROI Calculator</h1>
-        <p id="subtitle">A working lead-value and ROI calculator mini-site for agencies, freelancers, and service businesses that want to show campaign value before spending ad dollars.</p>
+        <h1>Custom Lead Value & Campaign Economics Calculator</h1>
+        <p id="subtitle">A working scenario-planning calculator demo for agencies, freelancers, and service businesses that want a clearer way to discuss lead value, break-even client volume, and advertising assumptions. Results depend entirely on the numbers entered and do not guarantee campaign performance, profitability, revenue, leads, or sales.</p>
 
         <div class="copy-grid">
           <label>
@@ -79,23 +79,23 @@
         </label>
 
         <label>
-          Estimated LTV uplift from retention (%)
+          Additional customer value included in this forecast (%)
           <input id="ltv-uplift" type="number" min="0" max="200" step="1" value="30" />
         </label>
 
-        <button id="calculate" type="button">Run ROI calculation</button>
+        <button id="calculate" type="button">Run scenario calculation</button>
       </section>
 
       <section class="card result" aria-live="polite">
         <h2>Result</h2>
-        <p id="status-line">Enter values and click run to see your forecast.</p>
+        <p id="status-line">Enter assumptions and click run to see an illustrative scenario.</p>
 
         <div id="results" class="hidden">
           <p><strong>Qualified leads:</strong> <span id="qualified-leads">0</span></p>
           <p><strong>New clients/month:</strong> <span id="new-clients">0</span></p>
-          <p><strong>Estimated gross profit/month:</strong> <span id="monthly-profit">$0</span></p>
+          <p><strong>Estimated gross profit from projected new clients:</strong> <span id="monthly-profit">$0</span></p>
           <p><strong>Break-even clients needed:</strong> <span id="break-even">0</span></p>
-          <p><strong>ROI on ad spend:</strong> <span id="roi">0%</span></p>
+          <p><strong>Estimated gross-profit ROI after ad spend:</strong> <span id="roi">0%</span></p>
           <p><strong>Lead cost:</strong> <span id="cost-per-lead">$0</span></p>
           <p id="interpretation"></p>
         </div>
@@ -103,7 +103,7 @@
         <a id="cta" class="cta" href="mailto:thewatchersedgestore@gmail.com?subject=Lead%20Value%20%26%20ROI%20Calculator%20mini-site">Preview results email</a>
         <a class="seller-cta cta secondary" href="mailto:thewatchersedgestore@gmail.com?subject=Customization%20request%20-%20Lead%20Value%20%26%20ROI%20Calculator">Ask TWEStore about customization</a>
 
-        <p class="hint">Buyer note: this is a live static demo. The delivered mini-site can be customized with your brand, contact email, CTA wording, and calculator assumptions.</p>
+        <p class="hint">Scenario-planning demo only. Outputs are estimates based on user-provided assumptions and are not financial, accounting, or advertising advice. A custom build can be scoped with your brand, approved inputs, formulas, currency, result wording, source files, setup notes, and desktop/mobile QA.</p>
       </section>
     </main>
 

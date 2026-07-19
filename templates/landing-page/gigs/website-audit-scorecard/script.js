@@ -2,13 +2,13 @@ const labels = {
   'value-prop': 'Clarify your core offer headline so a visitor immediately understands what is sold.',
   'cta-fold': 'Move the primary CTA above the fold and keep it visible on mobile.',
   'lead-capture': 'Add a simple lead form, booking widget, or direct contact action in one click.',
-  'trust': 'Add 2-3 real testimonials and proof (reviews, logos, before/after, case wins).',
+  'trust': 'Add genuine, permissioned proof that is relevant to the offer, such as verified reviews, approved client logos, documented before-and-after examples, or a sourced case study.',
   'mobile': 'Improve spacing, tap targets, and readability for mobile conversion users.',
   'speed': 'Compress hero images, defer non-critical scripts, and remove render-blocking assets.',
   'content': 'Add FAQ, pricing clarity, and scope details that answer objections.',
   'contact': 'Move contact information and response-time expectations into the hero and footer.',
-  'analytics': 'Install GA4 + conversion events and verify they fire on lead submission.',
-  'retargeting': 'Create at least one retargeting audience and a simple follow-up sequence.'
+  'analytics': 'Confirm appropriate analytics, conversion measurement, privacy disclosures, and consent controls for the website jurisdiction and business requirements.',
+  'retargeting': 'Confirm the follow-up path and privacy disclosures are appropriate before collecting or using visitor data.'
 };
 
 const sliderData = {
@@ -99,9 +99,20 @@ function updateScore() {
 }
 
 document.getElementById('score-btn').addEventListener('click', updateScore);
+function syncSliderLabel(slider) {
+  const label = slider.closest('fieldset').querySelector('legend').textContent;
+  const span = slider.closest('label').querySelector('span').textContent;
+  let output = slider.parentElement.querySelector('.slider-value');
+  if (!output) {
+    output = document.createElement('strong');
+    output.className = 'slider-value';
+    slider.parentElement.appendChild(output);
+  }
+  output.textContent = `${slider.value}/5`;
+  slider.setAttribute('aria-label', `${label}: ${span} score ${slider.value} out of 5`);
+}
+
 document.querySelectorAll('#audit-form input[type=range]').forEach((slider) => {
-  slider.addEventListener('input', () => {
-    const label = slider.closest('fieldset').querySelector('legend').textContent;
-    slider.setAttribute('aria-label', `${label} score ${slider.value}`);
-  });
+  syncSliderLabel(slider);
+  slider.addEventListener('input', () => syncSliderLabel(slider));
 });

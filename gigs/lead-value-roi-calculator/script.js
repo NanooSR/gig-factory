@@ -14,14 +14,22 @@ function isUsablePreviewEmail(value) {
     && !email.includes('yourdomain');
 }
 
+function readNumber(id) {
+  const input = document.getElementById(id);
+  const value = Number(input.value || 0);
+  const min = input.min !== '' ? Number(input.min) : -Infinity;
+  const max = input.max !== '' ? Number(input.max) : Infinity;
+  return Math.min(max, Math.max(min, Number.isFinite(value) ? value : 0));
+}
+
 function run() {
-  const monthlyLeads = Number(document.getElementById('monthly-leads').value || 0);
-  const qualificationRate = Number(document.getElementById('qualification-rate').value || 0) / 100;
-  const closeRate = Number(document.getElementById('close-rate').value || 0) / 100;
-  const revenuePerClient = Number(document.getElementById('revenue-per-client').value || 0);
-  const margin = Number(document.getElementById('gross-margin').value || 0) / 100;
-  const adSpend = Number(document.getElementById('ad-spend').value || 0);
-  const ltvUplift = Number(document.getElementById('ltv-uplift').value || 0) / 100;
+  const monthlyLeads = readNumber('monthly-leads');
+  const qualificationRate = readNumber('qualification-rate') / 100;
+  const closeRate = readNumber('close-rate') / 100;
+  const revenuePerClient = readNumber('revenue-per-client');
+  const margin = readNumber('gross-margin') / 100;
+  const adSpend = readNumber('ad-spend');
+  const ltvUplift = readNumber('ltv-uplift') / 100;
 
   const qualifiedLeads = Math.max(0, monthlyLeads * qualificationRate);
   const newClients = Math.max(0, qualifiedLeads * closeRate);
@@ -45,27 +53,27 @@ function run() {
   document.getElementById('new-clients').textContent = round2(newClients).toLocaleString();
   document.getElementById('monthly-profit').textContent = currency.format(grossProfit);
   document.getElementById('break-even').textContent = round2(breakEvenClients) > 0
-    ? `${round2(breakEvenClients)} clients`
+    ? `${round2(breakEvenClients)} clients / ${Math.ceil(breakEvenClients)} whole-client target`
     : 'n/a';
   document.getElementById('cost-per-lead').textContent = currency.format(costPerLead);
 
   roiLine.textContent = roi === null ? 'Not applicable without ad spend' : `${fmtPercent(roi)}`;
   const hasEnoughInputs = monthlyLeads > 0 && revenuePerClient > 0 && margin > 0;
   status.textContent = hasEnoughInputs
-    ? 'Forecast is ready. Use this to compare offer quality against ad spend.'
+    ? 'Illustrative scenario is ready. Verify conversion, margin, timing, retention, and cost assumptions before using this in a budget decision.'
     : 'Add lead volume, revenue, and margin assumptions to make this forecast meaningful.';
 
   if (roi === null) {
     roiLine.className = '';
-    interpretation.textContent = 'ROI needs a non-zero ad spend. Profit and client estimates are still shown above.';
+    interpretation.textContent = 'Estimated ROI needs a non-zero ad spend. Client and gross-profit estimates are still shown above.';
     interpretation.className = '';
   } else if (roi >= 0) {
     roiLine.className = 'good';
-    interpretation.textContent = 'Positive ROI scenario: margin and conversion support profitable campaigns.';
+    interpretation.textContent = 'Positive scenario under the entered assumptions. Verify the conversion, margin, timing, retention, and cost inputs before using this estimate in a budget decision.';
     interpretation.className = 'good';
   } else {
     roiLine.className = 'bad';
-    interpretation.textContent = 'Negative ROI at current assumptions. Raise conversion/average value or reduce CAC.';
+    interpretation.textContent = 'Negative scenario under the entered assumptions. Review lead quality, conversion, margin, customer value, and acquisition cost. No single adjustment guarantees a profitable result.';
     interpretation.className = 'bad';
   }
 
@@ -79,8 +87,8 @@ function run() {
     `- Monthly leads: ${monthlyLeads}`,
     `- Qualified leads (${fmtPercent(qualificationRate * 100)}): ${round2(qualifiedLeads)}`,
     `- New clients (${fmtPercent(closeRate * 100)}): ${round2(newClients)}`,
-    `- Gross profit/mo: ${currency.format(grossProfit)}`,
-    `- ROI: ${roi === null ? 'not applicable without ad spend' : fmtPercent(roi) + ' / month'}`,
+    `- Estimated gross profit from projected new clients: ${currency.format(grossProfit)}`,
+    `- Estimated gross-profit ROI after ad spend: ${roi === null ? 'not applicable without ad spend' : fmtPercent(roi)}`,
     `- Estimated cost/lead: ${currency.format(costPerLead)}`
   ].join('\n');
 
