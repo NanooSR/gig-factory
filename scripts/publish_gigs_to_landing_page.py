@@ -228,6 +228,7 @@ def write_landing_page() -> None:
       <p class="sub">Each card below links to an actual static deliverable. The screenshots show the product in use so customers can see what they are buying before they click.</p>
       <div class="hero-actions">
         <a class="cta" href="#gigs">See the gigs</a>
+        <a class="link-btn" href="mailto:thewatchersedgestore@gmail.com?subject=Customization%20request%20-%20Vercel%20Gig%20Factory">Ask about customization</a>
         <a class="link-btn" href="https://github.com/NanooSR/gig-factory">View source repo</a>
       </div>
     </div>
