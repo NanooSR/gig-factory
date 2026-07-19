@@ -6,6 +6,14 @@ function fmtPercent(value, digits = 1) {
   return `${round2(value).toFixed(digits)}%`;
 }
 
+function isUsablePreviewEmail(value) {
+  const email = value.trim().toLowerCase();
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+    && !email.endsWith('@example.com')
+    && !email.includes('yourbrand')
+    && !email.includes('yourdomain');
+}
+
 function run() {
   const monthlyLeads = Number(document.getElementById('monthly-leads').value || 0);
   const qualificationRate = Number(document.getElementById('qualification-rate').value || 0) / 100;
@@ -61,7 +69,7 @@ function run() {
     interpretation.className = 'bad';
   }
 
-  const brandEmail = document.getElementById('brand-email').value.trim() || 'hello@yourbrand.com';
+  const brandEmail = document.getElementById('brand-email').value.trim();
   const brandName = document.getElementById('brand-name').value.trim() || 'Your Agency';
   const ctaText = document.getElementById('cta-text').value.trim() || 'Book a growth call';
 
@@ -77,8 +85,13 @@ function run() {
   ].join('\n');
 
   const cta = document.getElementById('cta');
-  cta.textContent = ctaText;
-  cta.href = `mailto:${encodeURIComponent(brandEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  if (isUsablePreviewEmail(brandEmail)) {
+    cta.textContent = ctaText || 'Preview results email';
+    cta.href = `mailto:${encodeURIComponent(brandEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  } else {
+    cta.textContent = 'Enter a real email to preview results email';
+    cta.removeAttribute('href');
+  }
 
   results.classList.remove('hidden');
 }

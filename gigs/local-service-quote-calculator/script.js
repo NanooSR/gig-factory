@@ -1,5 +1,3 @@
-const BRAND_EMAIL_DEFAULT = 'hello@yourdomain.com';
-
 const serviceType = document.getElementById('service-type');
 const hours = document.getElementById('hours');
 const hourlyRate = document.getElementById('hourly-rate');
@@ -25,6 +23,14 @@ const messageEl = document.getElementById('client-message');
 const planningBufferRate = 0.072;
 const currency = new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' });
 
+function isUsablePreviewEmail(value) {
+  const email = value.trim().toLowerCase();
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+    && !email.endsWith('@example.com')
+    && !email.includes('yourbrand')
+    && !email.includes('yourdomain');
+}
+
 function calculateTotal() {
   const base = Number(serviceType.value);
   const laborHours = Math.max(0, Number(hours.value || 0));
@@ -38,9 +44,9 @@ function calculateTotal() {
     .reduce((sum, input) => sum + Number(input.dataset.cost), 0);
 
   const laborCost = laborHours * laborRate;
-  const subtotalBeforeTax = (base + laborCost + materialsCost + addOns) * team * urgencyMultiplier;
-  const planningBuffer = subtotalBeforeTax * planningBufferRate;
-  const total = subtotalBeforeTax + planningBuffer;
+  const subtotalBeforeBuffer = (base + laborCost + materialsCost + addOns) * team * urgencyMultiplier;
+  const planningBuffer = subtotalBeforeBuffer * planningBufferRate;
+  const total = subtotalBeforeBuffer + planningBuffer;
 
   const deposit = Math.round(total * 0.35);
   const eta = urgencyMultiplier > 1.2
@@ -55,25 +61,30 @@ function calculateTotal() {
       ? 'Starter-mid package pricing tier'
       : 'Intro package pricing tier';
 
-  const brandEmail = brandEmailEl.value.trim() || BRAND_EMAIL_DEFAULT;
+  const brandEmail = brandEmailEl.value.trim();
   const brandName = brandNameEl.value.trim() || 'Your Business';
 
-  subtotalEl.textContent = currency.format(Math.round(subtotalBeforeTax));
+  const estimateIsUsable = hours.checkValidity() && hourlyRate.checkValidity() && materials.checkValidity() && laborHours >= 1 && laborRate >= 20 && materialsCost >= 0;
+  if (!estimateIsUsable) {
+    resultCard.classList.add('hidden');
+    ctaEl.removeAttribute('href');
+    messageEl.textContent = 'Enter labor hours of at least 1, an hourly rate of at least $20, and non-negative materials to generate a demo estimate.';
+    return;
+  }
+
+  subtotalEl.textContent = currency.format(Math.round(subtotalBeforeBuffer));
   taxEl.textContent = currency.format(Math.round(planningBuffer));
   totalEl.textContent = currency.format(Math.round(total));
   depositEl.textContent = currency.format(deposit);
   bandEl.textContent = band;
   etaEl.textContent = eta;
-  const estimateIsUsable = laborHours > 0 && laborRate > 0;
-  messageEl.textContent = estimateIsUsable
-    ? `${brandName} quote generated. Paste this in a proposal email.`
-    : 'Add positive labor hours and hourly rate before treating this as a usable quote.';
+  messageEl.textContent = `${brandName} demo estimate generated. Review and replace the default pricing rules before sending this result to a customer.`;
 
   const subject = `Quote request from ${brandName}`;
   const body = [
     `Estimated service: ${serviceType.options[serviceType.selectedIndex].text}`,
     `Labor: ${laborHours}h @ $${laborRate}/h`,
-    `Subtotal before tax: ${currency.format(Math.round(subtotalBeforeTax))}`,
+    `Subtotal before planning buffer: ${currency.format(Math.round(subtotalBeforeBuffer))}`,
     `Estimated planning buffer: ${currency.format(Math.round(planningBuffer))}`,
     `Total: ${currency.format(Math.round(total))}`,
     `Suggested deposit: ${currency.format(deposit)}`,
@@ -81,8 +92,13 @@ function calculateTotal() {
     'Generated with Local Service Quote Calculator mini-site. Final tax, permit, and travel rules should be confirmed by the service provider.'
   ].join('\n');
 
-  ctaEl.href = `mailto:${encodeURIComponent(brandEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  ctaEl.textContent = ctaTextEl.value.trim() || 'Get your custom quote';
+  if (isUsablePreviewEmail(brandEmail)) {
+    ctaEl.href = `mailto:${encodeURIComponent(brandEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    ctaEl.textContent = ctaTextEl.value.trim() || 'Preview quote email';
+  } else {
+    ctaEl.removeAttribute('href');
+    ctaEl.textContent = 'Enter a real email to preview quote email';
+  }
 
   if (resultCard.classList.contains('hidden')) {
     resultCard.classList.remove('hidden');
