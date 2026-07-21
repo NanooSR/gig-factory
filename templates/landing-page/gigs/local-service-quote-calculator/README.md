@@ -1,4 +1,4 @@
-# Local Service Quote Calculator
+# Custom Service Estimate & Intake Calculator
 
 ## Target buyer
 Small local service businesses and freelancers who sell recurring jobs and need faster quoting:
@@ -10,20 +10,21 @@ Small local service businesses and freelancers who sell recurring jobs and need 
 - local service agencies for SMB clients
 
 ## Problem this solves
-Leads often disappear when pricing discussions are slow or unclear. This mini-site gives you a fast, consistent quote flow your lead can see instantly and that you can reuse for calls, social DMs, and proposals.
+Leads often disappear when estimate discussions are slow or unclear. This mini-site gives you a fast, consistent non-binding estimate and intake flow your lead can see instantly and that you can reuse for calls, social DMs, and proposals.
 
 ## What is included
 - Responsive landing-style calculator interface
 - Editable brand fields (business name, contact, CTA)
-- Configurable logic for service type, labor, team size, urgency, add-ons, and materials
-- Automatically generates subtotal, tax/contingency, total, deposit, and timeline
-- Built-in mail-to-quote CTA with prefilled details
+- Configurable logic for service type, labour, approved crew-size multipliers, urgency, add-ons, materials/pass-through costs, planning allowance, deposit, and completion window
+- Customer/project intake fields for name, reply contact, service location/postal code, and access notes
+- Automatically generates subtotal, illustrative planning allowance, non-binding estimate total, deposit, and timeline
+- Built-in mail-to-estimate CTA with prefilled job and intake details
 
 ## Customization ideas
 - Replace service options with your local niche pricing
-- Update tax/contingency assumptions and labor assumptions
+- Replace the sample planning-allowance and labour assumptions with the service provider’s approved written rules
 - Change the copy and tone to fit premium or budget positioning
-- Add a “project notes” textarea and include it in the email body
+- Adjust customer/project context fields and include them in the email body
 - Connect the CTA to a calendar scheduling URL when needed
 
 ## Suggested selling-price range

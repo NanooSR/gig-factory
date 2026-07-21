@@ -181,6 +181,62 @@ button {
   }
 }
 
+.product-readiness {
+  border-color: rgba(45, 212, 191, 0.38) !important;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.88), rgba(20, 83, 45, 0.28)) !important;
+}
+
+.feature-list {
+  margin: 1rem 0;
+  padding-left: 1.2rem;
+}
+
+.feature-list li {
+  margin: 0.45rem 0;
+}
+
+.scope-note {
+  color: #cbd5e1;
+  border-top: 1px solid rgba(148, 163, 184, 0.24);
+  padding-top: 0.9rem;
+}
+
+.action-button {
+  margin-top: 0.75rem;
+  margin-right: 0.6rem;
+}
+
+.intake-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+textarea {
+  width: 100%;
+  min-height: 5.5rem;
+  resize: vertical;
+}
+
+.formula-note {
+  margin: 1rem 0;
+  padding: 1rem;
+  border-radius: 18px;
+  background: rgba(14, 165, 233, 0.12);
+  border: 1px solid rgba(125, 211, 252, 0.28);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #facc15;
+  outline-offset: 3px;
+}
+
+
 .live-preview-gallery {
   margin-top: 1.5rem;
 }

@@ -23,17 +23,17 @@ Turn lead assumptions into profit clarity in 60 seconds. I built a Lead Value RO
 
 ---
 
-## 2) Local Service Quote Calculator
+## 2) Custom Service Estimate & Intake Calculator
 
 ### LinkedIn DM
-"Hi [Name], I put together a Local Service Quote Calculator mini-app that gives prospects instant quotes with branded fields and auto-generated email follow-up details. It cuts quote back-and-forth for trades/local operators and is ready for marketplace sale as-is."
+"Hi [Name], I put together a Custom Service Estimate & Intake Calculator mini-app that gives prospects a non-binding planning estimate, collects job context, and prepares branded email follow-up details. It cuts estimate back-and-forth for trades/local operators while keeping final pricing provider-approved."
 
 ### Email
-**Subject:** Instant quote calculator template for local service operators
+**Subject:** Estimate and intake calculator template for local service operators
 
 Hi [Name],
 
-I can share a Local Service Quote Calculator template designed for contractors and local teams who need faster, consistent estimates. It handles labor, add-ons, tax/contingency, deposit, and totals in a responsive flow with a branded mail-to-quote CTA.
+I can share a Custom Service Estimate & Intake Calculator template designed for contractors and local teams who need faster, consistent non-binding estimates. It handles labour, add-ons, materials/pass-through costs, a documented sample planning allowance, deposit, completion window, customer/job intake, and totals in a responsive flow with a branded mail-to-estimate CTA.
 
 Includes all files (`index.html`, `styles.css`, `script.js`) and editable logic. If useful, I can send:
 - pre-vetted pricing tiers, and
@@ -43,7 +43,7 @@ Best,
 [Your Name]
 
 ### Social post
-Local operators: reduce quote friction with a branded, instant Quote Calculator. This static template handles jobs, materials, urgency, timeline, taxes, deposits, and gives clients a clean branded summary by email. Great for freelancers, movers, electricians, landscapers, and handymen.
+Local operators: reduce estimate friction with a branded Estimate & Intake Calculator. This static template handles jobs, materials/pass-through costs, urgency, completion window, planning allowance, deposits, customer context, and a clean branded email summary. Great for freelancers, movers, electricians, landscapers, and handymen.
 
 ---
 

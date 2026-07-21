@@ -3,45 +3,64 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Custom Service Estimate & Quote-Intake Calculator</title>
+    <title>Custom Service Estimate & Intake Calculator</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="page">
       <header class="hero">
-        <p class="eyebrow">LIVE DEMO MINI-SITE</p>
-        <h1 id="gig-title">Custom Service Estimate & Quote-Intake Calculator</h1>
+        <p class="eyebrow">WORKING INTERACTIVE PREVIEW</p>
+        <h1 id="gig-title">Custom Service Estimate & Intake Calculator</h1>
         <p class="intro" id="gig-subhead">
-          A branded planning-estimate demo built around one business’s approved services, rates, modifiers, surcharges, deposit rules, and follow-up flow. Demo values are illustrative and must be replaced and tested before customer use.
+          A configurable non-binding estimate and intake tool built around one service provider’s written and approved services, labour rules, add-ons, travel rules, deposits, completion windows, and follow-up process. The sample configuration below is illustrative and must be replaced and verified before customer launch.
         </p>
 
         <div class="brand-panel" aria-label="Brand and copy settings">
-          <h2>Demo settings</h2>
+          <h2>Preview settings</h2>
           <div class="brand-grid">
             <label>
-              Demo brand name
+              Preview brand name
               <input id="brand-name" type="text" value="TWE Local Services" />
             </label>
             <label>
-              Demo contact email
-              <input id="brand-email" type="email" value="hello@example.com" />
+              Preview contact email
+              <input id="brand-email" type="email" value="thewatchersedgestore@gmail.com" />
             </label>
             <label>
-              Demo CTA
-              <input id="brand-cta" type="text" value="Get your custom quote" />
+              Preview CTA
+              <input id="brand-cta" type="text" value="Get your custom estimate" />
             </label>
           </div>
-          <p class="brand-note">These fields demonstrate how a delivered static mini-site can be customized for one approved niche, brand, contact email, CTA, pricing logic, and non-binding estimate language.</p>
+          <p class="brand-note">These fields show how a delivered static mini-site can be customized for one approved niche, brand, contact email, CTA, pricing logic, and non-binding estimate language.</p>
         </div>
       </header>
 
       <main class="content-grid">
         <section class="panel" id="form-panel">
-          <h2>Build an illustrative planning estimate</h2>
-          <p class="panel-subhead">Adjust the demo inputs. A production build uses only the service provider’s written and approved pricing rules.</p>
+          <h2>Build a non-binding planning estimate</h2>
+          <p class="panel-subhead">Adjust the sample inputs. A production build uses only the service provider’s written and approved pricing rules.</p>
+
+          <div class="intake-grid" aria-label="Customer and job intake fields">
+            <label>
+              Customer name
+              <input id="customer-name" type="text" value="Sample Customer" />
+            </label>
+            <label>
+              Reply email or phone
+              <input id="customer-contact" type="text" value="customer@example.ca" />
+            </label>
+            <label>
+              Service address or postal code
+              <input id="service-location" type="text" value="Cambridge, ON" />
+            </label>
+            <label>
+              Project details and access notes
+              <textarea id="project-notes">Three-bedroom home; confirm parking, pets, and access before final quote.</textarea>
+            </label>
+          </div>
 
           <label>
-            Residential cleaning demo service
+            Residential cleaning sample service
             <select id="service-type">
               <option value="260">Standard residential cleaning visit</option>
               <option value="420">Deep cleaning / move-out cleaning</option>
@@ -61,20 +80,20 @@
           </label>
 
           <label>
-            Team size
+            Approved crew-size labour multiplier
             <select id="team-size">
-              <option value="1">1 technician</option>
-              <option value="1.2">2 technicians</option>
-              <option value="1.35">3-4 technicians</option>
+              <option value="1">1 technician — 1.00× labour</option>
+              <option value="1.2">2 technicians — 1.20× labour sample</option>
+              <option value="1.35">3–4 technicians — 1.35× labour sample</option>
             </select>
           </label>
 
           <label>
             Urgency
             <select id="urgency">
-              <option value="1">Standard (within 2 weeks)</option>
-              <option value="1.12">Priority (3-7 days)</option>
-              <option value="1.22">Rush (48 hours)</option>
+              <option value="1">Standard (4–7 business days)</option>
+              <option value="1.12">Priority (2–4 business days)</option>
+              <option value="1.22">Rush (2 business days)</option>
             </select>
           </label>
 
@@ -92,27 +111,46 @@
             <input id="materials" type="number" min="0" step="5" value="40" />
           </label>
 
-          <button id="calculate" type="button">Calculate my quote</button>
+          <section class="formula-note" aria-label="How this estimate is calculated">
+            <h3>Pricing configuration transparency</h3>
+            <p>Sample total = selected base service fee + materials/pass-through input + selected add-ons + labour hours × hourly rate × approved crew-size multiplier × urgency multiplier. The planning allowance is a 7.2% illustrative sample and must be replaced with the service provider’s approved rule before customer launch.</p>
+          </section>
+
+          <button id="calculate" type="button">Calculate planning estimate</button>
         </section>
 
         <section class="panel result-card" aria-live="polite">
-          <h2>Quote breakdown</h2>
+          <h2>Non-binding estimate breakdown</h2>
           <p id="client-message">Enter job details to generate a proposal total.</p>
 
           <div id="breakdown" class="hidden">
             <p><strong>Labour subtotal after team/urgency:</strong> <span id="labor-subtotal">$0</span></p>
             <p><strong>Fixed service/add-on/pass-through costs:</strong> <span id="fixed-subtotal">$0</span></p>
             <p><strong>Subtotal:</strong> <span id="subtotal">$0</span></p>
-            <p><strong>Illustrative demo planning buffer:</strong> <span id="tax">$0</span></p>
+            <p><strong>Illustrative planning allowance (7.2% sample — replace with approved rule):</strong> <span id="allowance">$0</span></p>
             <p class="total-row"><strong>Total estimate:</strong> <span id="total">$0</span></p>
             <p id="band" class="muted"></p>
-            <a id="cta" class="cta-button" href="mailto:thewatchersedgestore@gmail.com?subject=Custom%20Service%20Estimate%20Quote-Intake%20Calculator%20demo">Preview quote email</a>
-            <a class="seller-cta cta-button secondary" href="mailto:thewatchersedgestore@gmail.com?subject=Customization%20request%20-%20Custom%20Service%20Estimate%20Quote-Intake%20Calculator">Ask TWEStore about customization</a>
-            <p class="fine-print">Illustrative demo deposit: <strong id="deposit">$0</strong> · Illustrative demo completion window: <span id="eta">—</span></p>
+            <p class="fine-print">Illustrative deposit: <strong id="deposit">$0</strong> · Illustrative completion window: <span id="eta">—</span></p>
           </div>
+          <a id="cta" class="cta-button" href="mailto:thewatchersedgestore@gmail.com?subject=Custom%20Service%20Estimate%20%26%20Intake%20Calculator%20preview">Preview estimate email</a>
+          <a class="seller-cta cta-button secondary" href="mailto:thewatchersedgestore@gmail.com?subject=Customization%20request%20-%20Custom%20Service%20Estimate%20%26%20Intake%20Calculator">Ask TWEStore about customization</a>
+          <button id="copy-summary" type="button" class="cta-button secondary action-button">Copy estimate summary</button>
+          <button id="reset-sample" type="button" class="cta-button secondary action-button">Reset sample estimate</button>
+        </section>
+
+        <section class="panel product-readiness" aria-label="What is included">
+          <p class="eyebrow">Production-ready offer</p>
+          <h2>What a buyer receives</h2>
+          <ul class="feature-list">
+            <li>Editable static HTML/CSS/JS quote-intake calculator with service, labour, urgency, add-on, pass-through, deposit, and ETA logic.</li>
+            <li>Non-binding estimate language that keeps final scope, taxes, materials, travel, permits, and contracts provider-approved.</li>
+            <li>Copy-ready quote summary for email follow-up and lead handoff.</li>
+            <li>Setup notes for replacing sample services, rates, multipliers, completion windows, CTA, and brand styling.</li>
+          </ul>
+          <p class="scope-note"><strong>Boundary:</strong> This is an estimate/intake tool. A custom delivery must use the service provider’s written pricing rules before customer launch.</p>
         </section>
         <section class="panel">
-          <h2>Important demo boundary</h2>
+          <h2>Important estimate boundary</h2>
           <p class="fine-print">Planning estimate only; not a binding quote. Final scope, availability, taxes, permits, travel, materials, and contract terms are confirmed by the service provider. Team size and urgency apply only to approved labour components; flat fees, supplies, taxes, permits, travel, and pass-through costs remain separate unless the written pricing rules say otherwise.</p>
         </section>
       </main>

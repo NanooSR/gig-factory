@@ -9,21 +9,21 @@
   <body>
     <main class="shell">
       <header class="hero">
-        <p class="eyebrow">LIVE DEMO MINI-SITE</p>
+        <p class="eyebrow">WORKING INTERACTIVE PREVIEW</p>
         <h1>Custom Lead Value & Campaign Economics Calculator</h1>
-        <p id="subtitle">A working scenario-planning calculator demo for agencies, freelancers, and service businesses that want a clearer way to discuss lead value, break-even client volume, and advertising assumptions. Results depend entirely on the numbers entered and do not guarantee campaign performance, profitability, revenue, leads, or sales.</p>
+        <p id="subtitle">A working scenario-planning calculator for agencies, freelancers, and service businesses that want a clearer way to discuss lead value, break-even client volume, margins, and advertising assumptions. Results depend entirely on the numbers entered and do not guarantee campaign performance, profitability, revenue, leads, or sales.</p>
 
         <div class="copy-grid">
           <label>
-            Demo brand name
+            Preview brand name
             <input id="brand-name" value="TWE Growth Studio" />
           </label>
           <label>
-            Demo contact email
-            <input id="brand-email" type="email" value="hello@example.com" />
+            Preview contact email
+            <input id="brand-email" type="email" value="thewatchersedgestore@gmail.com" />
           </label>
           <label>
-            Demo CTA text
+            Preview CTA text
             <input id="cta-text" value="Book a growth call" />
           </label>
         </div>
@@ -67,9 +67,28 @@
           <input id="ltv-uplift" type="number" min="0" max="200" step="1" value="30" />
         </label>
 
+        <div id="validation-summary" class="validation-summary hidden" role="alert" aria-live="polite"></div>
+
+        <section class="formula-note" aria-label="How this scenario is calculated">
+          <h3>How this scenario is calculated</h3>
+          <p>Projected qualified leads = monthly leads × qualification rate. Projected new clients = qualified leads × client conversion rate. Estimated gross profit = projected clients × revenue per client × (1 + additional customer value) × gross margin. Gross-profit ROI = (estimated gross profit − ad spend) ÷ ad spend. Results are estimates based only on the assumptions entered.</p>
+        </section>
+
         <button id="calculate" type="button">Run scenario calculation</button>
       </section>
 
+
+      <section class="card product-readiness" aria-label="What is included">
+        <p class="eyebrow">Production-ready offer</p>
+        <h2>What a buyer receives</h2>
+        <ul class="feature-list">
+          <li>Editable static HTML/CSS/JS calculator with branded inputs, tested desktop/mobile layout, and clear CAD currency handling.</li>
+          <li>Lead-flow, qualification, close-rate, margin, ad-spend, break-even, cost-per-lead, and ROI scenario logic.</li>
+          <li>Copy-ready result summary for sales calls, budget reviews, or email follow-up.</li>
+          <li>Setup notes for replacing sample assumptions, email address, CTA wording, colours, and approved business rules.</li>
+        </ul>
+        <p class="scope-note"><strong>Boundary:</strong> This is a planning and conversation tool, not financial, accounting, legal, or ad-performance advice. A custom delivery uses the buyer’s approved assumptions and wording.</p>
+      </section>
       <section class="card result" aria-live="polite">
         <h2>Result</h2>
         <p id="status-line">Enter assumptions and click run to see an illustrative scenario.</p>
@@ -87,7 +106,9 @@
         <a id="cta" class="cta" href="mailto:thewatchersedgestore@gmail.com?subject=Lead%20Value%20%26%20ROI%20Calculator%20mini-site">Preview results email</a>
         <a class="seller-cta cta secondary" href="mailto:thewatchersedgestore@gmail.com?subject=Customization%20request%20-%20Lead%20Value%20%26%20ROI%20Calculator">Ask TWEStore about customization</a>
 
-        <p class="hint">Scenario-planning demo only. Outputs are estimates based on user-provided assumptions and are not financial, accounting, or advertising advice. A custom build can be scoped with your brand, approved inputs, formulas, currency, result wording, source files, setup notes, and desktop/mobile QA.</p>
+        <button id="copy-summary" type="button" class="cta secondary action-button">Copy result summary</button>
+        <button id="reset-sample" type="button" class="cta secondary action-button">Reset sample scenario</button>
+        <p class="hint">Scenario-planning preview only. Outputs are estimates based on user-provided assumptions and are not financial, accounting, or advertising advice. A custom build can be scoped with your brand, approved inputs, formulas, currency, result wording, source files, setup notes, and desktop/mobile QA.</p>
       </section>
     </main>
 

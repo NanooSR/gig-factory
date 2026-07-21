@@ -9,21 +9,21 @@
   <body>
     <main class="container">
       <header class="hero">
-        <p class="eyebrow">LIVE DEMO MINI-SITE</p>
+        <p class="eyebrow">WORKING INTERACTIVE PREVIEW</p>
         <h1>Manual Website Conversion-Readiness Scorecard</h1>
-        <p>A guided self-assessment demo that helps consultants and service providers structure a first-pass conversation about offer clarity, conversion flow, mobile presentation, trust, content, and tracking. It does not crawl, automatically test, or certify a website.</p>
+        <p>A guided manual self-assessment that helps consultants and service providers structure a first-pass conversation about offer clarity, conversion flow, mobile presentation, trust, content, tracking, and privacy expectations. It does not crawl, automatically test, or certify a website.</p>
 
         <div class="brand-area">
           <label>
-            Demo brand name
+            Preview brand name
             <input id="brand-name" value="TWE Web Review" />
           </label>
           <label>
-            Demo contact email
-            <input id="brand-email" type="email" value="hello@example.com" />
+            Preview contact email
+            <input id="brand-email" type="email" value="thewatchersedgestore@gmail.com" />
           </label>
           <label>
-            Demo CTA text
+            Preview CTA text
             <input id="cta-text" value="Order my website cleanup" />
           </label>
         </div>
@@ -48,6 +48,21 @@
       <section class="card">
         <h2>Score your website readiness manually</h2>
         <p class="muted">Manual scorecard only — not an automated SEO, accessibility, security, legal, privacy, or performance audit. Rate each area from 0 (not present) to 5 (excellent).</p>
+
+        <div class="context-grid" aria-label="Assessment context fields">
+          <label>
+            Business or website name
+            <input id="website-name" value="Sample Business Website" />
+          </label>
+          <label>
+            Website URL (optional)
+            <input id="website-url" type="url" value="https://example.ca" />
+          </label>
+          <label>
+            Reviewer notes (optional)
+            <textarea id="reviewer-notes">Sample first-pass review notes; replace with the buyer-approved context.</textarea>
+          </label>
+        </div>
 
         <form id="audit-form">
           <fieldset>
@@ -80,20 +95,34 @@
             <label><span>Follow-up path and privacy disclosures are appropriate</span> <input type="range" min="0" max="5" value="3" data-label="retargeting" /></label>
           </fieldset>
 
-          <button id="score-btn" type="button">Score this site</button>
+          <button id="score-btn" type="button">Calculate manual readiness score</button>
         </form>
       </section>
 
+
+      <section class="card product-readiness" aria-label="What is included">
+        <p class="eyebrow">Production-ready offer</p>
+        <h2>What a buyer receives</h2>
+        <ul class="feature-list">
+          <li>Editable static HTML/CSS/JS scorecard with 10 manual criteria, score bands, priority recommendations, and email-ready summary.</li>
+          <li>Consultant-safe wording that avoids pretending to crawl, certify, or automate SEO/accessibility/security/legal review.</li>
+          <li>Copy-ready action-plan output for sales calls, first-pass audits, or discovery sessions.</li>
+          <li>Setup notes for replacing rubric labels, scoring bands, CTA wording, industry language, and brand styling.</li>
+        </ul>
+        <p class="scope-note"><strong>Boundary:</strong> Manual scorecard only. It does not replace a professional SEO, accessibility, performance, security, privacy, or legal audit.</p>
+      </section>
       <section class="card result" aria-live="polite">
         <h2>Scorecard</h2>
         <p id="score-text">Set the sliders and calculate a score.</p>
         <div id="score-output" class="hidden">
           <p><strong>Total Score:</strong> <span id="total-score">0</span>/50</p>
-          <p><strong>Performance band:</strong> <span id="score-band"></span></p>
+          <p><strong>Readiness band:</strong> <span id="score-band"></span></p>
           <p><strong>Top fixes:</strong></p>
           <ul id="fix-list"></ul>
           <a id="cta" class="cta" href="mailto:thewatchersedgestore@gmail.com?subject=Manual%20Website%20Conversion-Readiness%20Scorecard%20mini-site">Preview scorecard email</a>
           <a class="seller-cta cta secondary" href="mailto:thewatchersedgestore@gmail.com?subject=Customization%20request%20-%20Manual%20Website%20Conversion-Readiness%20Scorecard">Ask TWEStore about customization</a>
+          <button id="copy-summary" type="button" class="cta secondary action-button">Copy action plan</button>
+          <button id="reset-sample" type="button" class="cta secondary action-button">Reset sample scorecard</button>
         </div>
       </section>
     </main>

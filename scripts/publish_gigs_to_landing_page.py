@@ -19,20 +19,20 @@ GIGS = [
     {
         "slug": "lead-value-roi-calculator",
         "title": "Lead Value & ROI Calculator",
-        "eyebrow": "Ad spend + lead quality proof",
-        "description": "A static calculator that turns lead flow, close rates, margins, and ad spend into a clear profit forecast for service providers.",
+        "eyebrow": "Lead value scenario planning",
+        "description": "A scenario-planning calculator for agencies, consultants, and service businesses that want clearer lead-value and ad-assumption conversations without guaranteed outcomes.",
     },
     {
         "slug": "local-service-quote-calculator",
-        "title": "Local Service Quote Calculator",
+        "title": "Custom Service Estimate & Intake Calculator",
         "eyebrow": "Fast quoting for service businesses",
-        "description": "A branded quote-builder mini-site for cleaners, landscapers, movers, electricians, and other local operators that need faster estimates.",
+        "description": "A planning-estimate preview for one approved service niche, with buyer-supplied rates, modifiers, exclusions, and non-binding estimate language.",
     },
     {
         "slug": "website-audit-scorecard",
         "title": "Website Audit Scorecard",
         "eyebrow": "Client-ready diagnostic offer",
-        "description": "A lightweight scorecard that helps freelancers and agencies show a buyer what needs fixing before a full web project starts.",
+        "description": "A manual scorecard preview that helps consultants structure a first-pass conversation about offer clarity, conversion flow, trust, content, and tracking.",
     },
 ]
 
@@ -75,16 +75,16 @@ def prepare_demo_state(page, slug: str) -> None:
     page.wait_for_load_state("domcontentloaded")
     if slug == "lead-value-roi-calculator":
         page.locator("#brand-name").fill("TWE Growth Studio")
-        page.locator("#brand-email").fill("hello@example.com")
+        page.locator("#brand-email").fill("thewatchersedgestore@gmail.com")
         page.locator("#calculate").click()
     elif slug == "local-service-quote-calculator":
         page.locator("#brand-name").fill("TWE Local Services")
-        page.locator("#brand-email").fill("hello@example.com")
+        page.locator("#brand-email").fill("thewatchersedgestore@gmail.com")
         page.locator("#hours").fill("6")
         page.locator("#calculate").click()
     elif slug == "website-audit-scorecard":
         page.locator("#brand-name").fill("TWE Web Review")
-        page.locator("#brand-email").fill("hello@example.com")
+        page.locator("#brand-email").fill("thewatchersedgestore@gmail.com")
         # Move a few sliders so the output is visibly not a blank/template-only state.
         for slider in page.locator("input[type='range']").all()[:4]:
             slider.evaluate("el => { el.value = 4; el.dispatchEvent(new Event('input', {bubbles:true})); }")
@@ -203,7 +203,7 @@ def write_landing_page() -> None:
             <h3>{gig['title']}</h3>
             <p>{gig['description']}</p>
             <div class="card-actions">
-              <a class="cta" href="gigs/{slug}/">Open live demo</a>
+              <a class="cta" href="gigs/{slug}/">Open working preview</a>
               <a class="link-btn" href="assets/screenshots/gigs/{slug}-mobile-output.png">Mobile screenshot</a>
             </div>
           </div>
@@ -223,9 +223,9 @@ def write_landing_page() -> None:
       <a class="cta secondary" href="#gigs">View Gigs</a>
     </nav>
     <div class="hero-content">
-      <p class="eyebrow">Live product proof for buyers</p>
-      <h1>Three ready-to-sell mini-site gigs with real screenshots and working demos.</h1>
-      <p class="sub">Each card below links to an actual static deliverable. The screenshots show the product in use so customers can see what they are buying before they click.</p>
+      <p class="eyebrow">Complete working base products for custom delivery</p>
+      <h1>Three interactive calculators and scorecards, ready to tailor to your brand and approved business rules.</h1>
+      <p class="sub">Try each complete working base product, review real desktop and mobile output, and request a scoped version using your approved copy, formulas, pricing rules, contact flow, and brand. Final scope, price, timeline, integrations, and support terms are confirmed in writing before delivery.</p>
       <div class="hero-actions">
         <a class="cta" href="#gigs">See the gigs</a>
         <a class="link-btn" href="mailto:thewatchersedgestore@gmail.com?subject=Customization%20request%20-%20Vercel%20Gig%20Factory">Ask about customization</a>
@@ -241,8 +241,8 @@ def write_landing_page() -> None:
 
     <section class="section grid-3">
       <article class="card"><h2>Actual screenshots</h2><p>Every gig card uses a captured output state, not a generic title-only graphic.</p></article>
-      <article class="card"><h2>Public demo URLs</h2><p>Each mini-site is linked from this Vercel deployment and can be opened directly.</p></article>
-      <article class="card"><h2>Static delivery</h2><p>The gigs are HTML/CSS/JS deliverables with ZIP packages already prepared in the repo.</p></article>
+      <article class="card"><h2>Public preview URLs</h2><p>Each mini-site is linked from this Vercel deployment and can be opened directly.</p></article>
+      <article class="card"><h2>Custom delivery</h2><p>Approved projects can be delivered as static HTML/CSS/JS packages with setup notes and agreed test cases. Hosting, integrations, data collection, and maintenance are included only when written into scope.</p></article>
     </section>
   </main>
 
