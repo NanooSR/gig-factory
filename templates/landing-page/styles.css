@@ -1,8 +1,11 @@
 * { box-sizing: border-box; }
-body { margin: 0; font-family: Inter, Arial, sans-serif; background: #0b1020; color: #eef2ff; line-height: 1.6; }
+html { overflow-x: hidden; }
+body { margin: 0; font-family: Inter, Arial, sans-serif; background: #0b1020; color: #eef2ff; line-height: 1.6; overflow-x: hidden; }
+.nav, .hero-content, .section, .card, .gig-card, .gig-card-body { min-width: 0; }
+a, button, input, textarea, p, li, h1, h2, h3, summary { overflow-wrap: anywhere; }
 .hero { padding: 24px; background: radial-gradient(circle at top, #1f2a56, #0b1020 60%); }
 .nav, .hero-content, .section { max-width: 1100px; margin: 0 auto; }
-.nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 64px; }
+.nav { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 64px; }
 .brand { font-weight: 800; letter-spacing: 0.04em; }
 h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.05; max-width: 10ch; }
 .eyebrow { color: #a5b4fc; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.12em; }
@@ -13,7 +16,7 @@ h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.05; max-width: 10ch; 
 .secondary { background: rgba(255,255,255,0.08); color: white; }
 .link-btn { color: #c4b5fd; }
 .section { padding: 56px 24px; }
-.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 20px; }
 .card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; padding: 24px; }
 .testimonial blockquote { font-size: 1.5rem; font-weight: 700; margin: 0 0 12px; }
 .faq details { margin-bottom: 12px; background: rgba(255,255,255,0.04); padding: 16px; border-radius: 12px; }
@@ -21,11 +24,17 @@ h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.05; max-width: 10ch; 
 input, textarea { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #334155; background: #111827; color: white; }
 textarea { min-height: 120px; resize: vertical; }
 @media (max-width: 640px) { .nav { margin-bottom: 32px; } }
+@media (max-width: 380px) {
+  .hero { padding: 18px 14px; }
+  .section { padding: 42px 14px; }
+  .card, .gig-card-body { padding: 18px; }
+  .cta, .link-btn { width: 100%; text-align: center; padding-inline: 12px; }
+}
 
 
 .gig-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(290px, 100%), 1fr));
   gap: 1.25rem;
 }
 
