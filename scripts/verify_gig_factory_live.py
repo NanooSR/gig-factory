@@ -112,7 +112,7 @@ def test_scorecard(page):
 
 
 def main():
-    report = {'base': BASE, 'expected_commit': 'cfff6423dd5bc2d63802c4b95fe49c7bb200033b', 'http': [], 'assets': [], 'viewports': []}
+    report = {'base': BASE, 'expected_commit': '1302081a0b78170bba10072cfb50b32db048f0d7', 'http': [], 'assets': [], 'viewports': []}
     for route in ROUTES:
         got = fetch_head(route)
         expect(got['status'] == 200, f'{route}: HTTP {got["status"]}')
