@@ -236,6 +236,19 @@ textarea:focus-visible {
   outline-offset: 3px;
 }
 
+/* Final accessibility/responsive hardening for 320px and 200% zoom checks. */
+html { overflow-x: hidden; }
+body { overflow-x: hidden; }
+.shell, .page, .container, .hero, .card, .panel, .result, .result-card, .content-grid, .brand-panel, .product-readiness { min-width: 0; max-width: 100%; }
+a, button, input, select, textarea, p, li, h1, h2, h3, strong, span, legend, summary { overflow-wrap: anywhere; }
+.copy-grid, .brand-grid, .brand-area, .intake-grid, .context-grid { grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); }
+input, select, textarea, button, a.cta, .cta-button { max-width: 100%; min-width: 0; }
+@media (max-width: 360px) {
+  .shell, .page, .container { padding: 10px; }
+  .hero, .card, .panel, .brand-panel, .gig-card-body { padding: 14px; }
+  .cta, .cta-button, .action-button, button { width: 100%; margin-right: 0; }
+}
+
 
 .live-preview-gallery {
   margin-top: 1.5rem;
