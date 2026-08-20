@@ -114,17 +114,33 @@ function estimateLines(estimate) {
   ];
 }
 
-function calculateTotal() {
+function invalidEstimateFields(estimate) {
+  const checks = [
+    [hours, hours.checkValidity() && estimate.laborHours >= 1],
+    [hourlyRate, hourlyRate.checkValidity() && estimate.laborRate >= 20],
+    [materials, materials.checkValidity() && estimate.materialsCost >= 0]
+  ];
+  checks.forEach(([field, valid]) => valid ? field.removeAttribute('aria-invalid') : field.setAttribute('aria-invalid', 'true'));
+  return checks.filter(([, valid]) => !valid).map(([field]) => field);
+}
+
+function calculateTotal(focusInvalid = false) {
   const estimate = readEstimate();
   const brandEmail = brandEmailEl.value.trim();
   const brandName = brandNameEl.value.trim() || 'Your Business';
-  if (!isEstimateUsable(estimate)) {
+  const invalidFields = invalidEstimateFields(estimate);
+  if (invalidFields.length || !isEstimateUsable(estimate)) {
     resultCard.classList.add('hidden');
     ctaEl.removeAttribute('href');
+    messageEl.setAttribute('role', 'alert');
+    messageEl.setAttribute('aria-live', 'assertive');
     messageEl.textContent = 'Enter labor hours of at least 1, an hourly rate of at least $20, and non-negative materials to generate an estimate preview.';
     lastEstimate = null;
+    if (focusInvalid && invalidFields.length) invalidFields[0].focus();
     return;
   }
+  messageEl.removeAttribute('role');
+  messageEl.setAttribute('aria-live', 'polite');
   lastEstimate = estimate;
   laborSubtotalEl.textContent = currency.format(Math.round(estimate.adjustedLaborCost));
   fixedSubtotalEl.textContent = currency.format(Math.round(estimate.fixedAndPassThroughCosts));
@@ -207,10 +223,10 @@ function resetSampleEstimate() {
 }
 
 updateOptionLabels();
-document.getElementById('calculate').addEventListener('click', calculateTotal);
+document.getElementById('calculate').addEventListener('click', () => calculateTotal(true));
 brandNameEl.addEventListener('input', updateBrand);
-[serviceType, hours, hourlyRate, teamSize, urgency, materials, customerNameEl, customerContactEl, serviceLocationEl, projectNotesEl, ctaTextEl, brandEmailEl].forEach((el) => el.addEventListener('input', calculateTotal));
-addonInputs.forEach((el) => el.addEventListener('change', calculateTotal));
+[serviceType, hours, hourlyRate, teamSize, urgency, materials, customerNameEl, customerContactEl, serviceLocationEl, projectNotesEl, ctaTextEl, brandEmailEl].forEach((el) => el.addEventListener('input', () => calculateTotal(false)));
+addonInputs.forEach((el) => el.addEventListener('change', () => calculateTotal(false)));
 document.getElementById('copy-summary').addEventListener('click', copyQuoteSummary);
 document.getElementById('reset-sample').addEventListener('click', resetSampleEstimate);
 updateBrand();

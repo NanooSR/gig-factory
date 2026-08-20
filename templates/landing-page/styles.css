@@ -16,7 +16,7 @@ h1 { font-size: clamp(2.5rem, 4.5vw, 3.5rem); line-height: 1.05; max-width: 18ch
 .cta { background: #7c3aed; color: white; }
 .secondary { background: rgba(255,255,255,0.08); color: white; }
 .link-btn { color: #c4b5fd; }
-.product-link { color: #99f6e4; font-weight: 800; text-underline-offset: 0.22em; }
+.product-link { display: inline-flex; align-items: center; min-height: 44px; padding-inline: 10px; color: #99f6e4; font-weight: 800; text-underline-offset: 0.22em; }
 .section { padding: 56px 24px; }
 .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 20px; }
 .card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; padding: 24px; }

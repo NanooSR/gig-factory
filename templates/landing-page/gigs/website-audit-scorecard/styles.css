@@ -172,6 +172,10 @@ textarea:focus-visible {
 /* Final accessibility/responsive hardening for 320px and 200% zoom checks. */
 html { overflow-x: hidden; }
 body { overflow-x: hidden; }
+input:not([type='checkbox']):not([type='radio']):not([type='range']),
+select,
+textarea,
+input[type='range'] { min-height: 44px; }
 .shell, .page, .container, .hero, .card, .panel, .result, .result-card, .content-grid, .brand-panel, .product-readiness { min-width: 0; max-width: 100%; }
 a, button, input, select, textarea, p, li, h1, h2, h3, strong, span, legend, summary { overflow-wrap: anywhere; }
 .copy-grid, .brand-grid, .brand-area, .intake-grid, .context-grid { grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); }
