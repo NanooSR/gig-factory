@@ -22,6 +22,8 @@ def test_contract():
   source=ROOT/'gigs'/slug;mirror=ROOT/'templates'/'landing-page'/'gigs'/slug
   for name in FILES:assert sha(source/name)==sha(mirror/name),(slug,name)
   html=(source/'index.html').read_text(encoding='utf-8');css=(source/'styles.css').read_text(encoding='utf-8');soup=BeautifulSoup(html,'html.parser')
+  meta=soup.find('meta',attrs={'name':'description'});assert meta and len(meta.get('content',''))>=80,slug
+  icon=soup.find('link',rel=lambda value:value and 'icon' in value);assert icon and icon.get('href','').startswith('data:image/svg+xml'),slug
   assert not soup.select('.live-preview-gallery'),slug
   sections=direct_sections(soup);assert sections
   assert sections[0].find('h2').get_text(' ',strip=True)==c['heading'],slug
