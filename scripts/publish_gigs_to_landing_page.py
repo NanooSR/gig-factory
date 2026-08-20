@@ -21,18 +21,21 @@ GIGS = [
         "title": "Lead Value & ROI Calculator",
         "eyebrow": "Lead value scenario planning",
         "description": "A scenario-planning calculator for agencies, consultants, and service businesses that want clearer lead-value and ad-assumption conversations without guaranteed outcomes.",
+        "gumroad_url": "https://nanoojr.gumroad.com/l/lfxro",
     },
     {
         "slug": "local-service-quote-calculator",
         "title": "Custom Service Estimate & Intake Calculator",
         "eyebrow": "Fast quoting for service businesses",
         "description": "A planning-estimate preview for one approved service niche, with buyer-supplied rates, modifiers, exclusions, and non-binding estimate language.",
+        "gumroad_url": "https://nanoojr.gumroad.com/l/bfqgb",
     },
     {
         "slug": "website-audit-scorecard",
         "title": "Website Audit Scorecard",
         "eyebrow": "Client-ready diagnostic offer",
         "description": "A manual scorecard preview that helps consultants structure a first-pass conversation about offer clarity, conversion flow, trust, content, and tracking.",
+        "gumroad_url": "https://nanoojr.gumroad.com/l/sapzeo",
     },
 ]
 
@@ -204,6 +207,7 @@ def write_landing_page() -> None:
             <p>{gig['description']}</p>
             <div class="card-actions">
               <a class="cta" href="gigs/{slug}/">Open working preview</a>
+              <a class="product-link" href="{gig['gumroad_url']}">View product on Gumroad</a>
               <a class="link-btn" href="assets/screenshots/gigs/{slug}-mobile-output.png">Mobile screenshot</a>
             </div>
           </div>
@@ -219,17 +223,17 @@ def write_landing_page() -> None:
 <body>
   <header class="hero">
     <nav class="nav">
-      <div class="brand">Gig Factory</div>
+      <div class="brand">The Watchers Edge — Interactive Tools</div>
       <a class="cta secondary" href="#gigs">View Gigs</a>
     </nav>
     <div class="hero-content">
       <p class="eyebrow">Complete working base products for custom delivery</p>
-      <h1>Three interactive calculators and scorecards, ready to tailor to your brand and approved business rules.</h1>
+      <h1>Interactive calculators and scorecards, ready for your brand and approved business rules.</h1>
       <p class="sub">Try each complete working base product, review real desktop and mobile output, and request a scoped version using your approved copy, formulas, pricing rules, contact flow, and brand. Final scope, price, timeline, integrations, and support terms are confirmed in writing before delivery.</p>
+      <p class="product-bridge">These working previews pair with three TWE products on Gumroad, so you can try the interaction before reviewing the downloadable product.</p>
       <div class="hero-actions">
         <a class="cta" href="#gigs">See the gigs</a>
         <a class="link-btn" href="mailto:thewatchersedgestore@gmail.com?subject=Customization%20request%20-%20Vercel%20Gig%20Factory">Ask about customization</a>
-        <a class="link-btn" href="https://github.com/NanooSR/gig-factory">View source repo</a>
       </div>
     </div>
   </header>
@@ -243,6 +247,11 @@ def write_landing_page() -> None:
       <article class="card"><h2>Actual screenshots</h2><p>Every gig card uses a captured output state, not a generic title-only graphic.</p></article>
       <article class="card"><h2>Public preview URLs</h2><p>Each mini-site is linked from this Vercel deployment and can be opened directly.</p></article>
       <article class="card"><h2>Custom delivery</h2><p>Approved projects can be delivered as static HTML/CSS/JS packages with setup notes and agreed test cases. Hosting, integrations, data collection, and maintenance are included only when written into scope.</p></article>
+    </section>
+    <section class="section technical-details" aria-labelledby="technical-details-title">
+      <h2 id="technical-details-title">Technical details</h2>
+      <p>Review the implementation repository when you need source-level context.</p>
+      <a class="link-btn" href="https://github.com/NanooSR/gig-factory">Technical source (GitHub)</a>
     </section>
   </main>
 

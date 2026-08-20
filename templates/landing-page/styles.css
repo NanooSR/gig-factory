@@ -7,14 +7,16 @@ a, button, input, textarea, p, li, h1, h2, h3, summary { overflow-wrap: anywhere
 .nav, .hero-content, .section { max-width: 1100px; margin: 0 auto; }
 .nav { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 64px; }
 .brand { font-weight: 800; letter-spacing: 0.04em; }
-h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.05; max-width: 10ch; }
+h1 { font-size: clamp(2.5rem, 4.5vw, 3.5rem); line-height: 1.05; max-width: 18ch; }
 .eyebrow { color: #a5b4fc; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.12em; }
 .sub { max-width: 700px; color: #cbd5e1; }
+.product-bridge { max-width: 720px; color: #e2e8f0; }
 .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 24px; }
 .cta, .link-btn { display: inline-block; text-decoration: none; border: none; cursor: pointer; padding: 14px 20px; border-radius: 12px; font-weight: 700; }
 .cta { background: #7c3aed; color: white; }
 .secondary { background: rgba(255,255,255,0.08); color: white; }
 .link-btn { color: #c4b5fd; }
+.product-link { color: #99f6e4; font-weight: 800; text-underline-offset: 0.22em; }
 .section { padding: 56px 24px; }
 .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 20px; }
 .card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; padding: 24px; }
@@ -23,7 +25,12 @@ h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.05; max-width: 10ch; 
 .form-card { display: grid; gap: 12px; max-width: 640px; }
 input, textarea { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #334155; background: #111827; color: white; }
 textarea { min-height: 120px; resize: vertical; }
-@media (max-width: 640px) { .nav { margin-bottom: 32px; } }
+@media (max-width: 640px) {
+  .hero { padding: 18px 16px 24px; }
+  .nav { margin-bottom: 24px; }
+  h1 { max-width: 14ch; margin-block: 0.6rem 1rem; }
+  .section { padding-block: 36px; }
+}
 @media (max-width: 380px) {
   .hero { padding: 18px 14px; }
   .section { padding: 42px 14px; }
@@ -75,4 +82,9 @@ textarea { min-height: 120px; resize: vertical; }
   align-items: center;
   gap: 0.8rem;
   margin-top: 1rem;
+}
+
+.technical-details {
+  border-top: 1px solid rgba(148, 163, 184, 0.2);
+  padding-top: 32px;
 }
