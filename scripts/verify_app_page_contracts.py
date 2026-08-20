@@ -32,8 +32,18 @@ def test_contract():
   assert soup.select_one('.seller-cta').get_text(' ',strip=True)==c['seller']
   buy=[a for a in soup.select('a.purchase-cta') if a.get('href')==c['url'] and a.get_text(' ',strip=True)==c['buy']];assert len(buy)==1,slug
   assert re.search(r'\.product-readiness\s*\{[^}]*color:\s*#f8fafc',css,re.S),slug
+  assert re.search(r'\.product-readiness\s*\{[^}]*background:\s*#102a2e',css,re.S),slug
   assert re.search(r'\.scope-note\s*\{[^}]*color:\s*#cbd5e1',css,re.S),slug
+  if slug=='local-service-quote-calculator':
+   assert '#06b6d4' not in css and '#0ea5e9' not in css and '#0284c7' not in css
+   assert 'linear-gradient(135deg, #1e3a8a 0%, #3730a3 52%, #155e75 100%)' in css
+   assert re.search(r'\.brand-note\s*\{[^}]*color:\s*#f8fafc',css,re.S)
+  if slug=='website-audit-scorecard':
+   assert '#0ea5e9' not in css and 'linear-gradient(135deg, #1d4ed8, #0369a1)' in css
  lead=BeautifulSoup((ROOT/'gigs'/'lead-value-roi-calculator'/'index.html').read_text(encoding='utf-8'),'html.parser');assert lead.select_one('#calculate')
  quote=BeautifulSoup((ROOT/'gigs'/'local-service-quote-calculator'/'index.html').read_text(encoding='utf-8'),'html.parser');assert len(quote.select('label > input.addon[type=checkbox]'))==5
+ assert quote.select_one('.brand-panel[role="group"][aria-label="Brand and copy settings"]')
+ assert quote.select_one('.intake-grid[role="group"][aria-label="Customer and job intake fields"]')
  score=BeautifulSoup((ROOT/'gigs'/'website-audit-scorecard'/'index.html').read_text(encoding='utf-8'),'html.parser');assert len(score.select('input[type=range]'))==10
+ assert score.select_one('.context-grid[role="group"][aria-label="Assessment context fields"]')
 if __name__=='__main__':test_contract();print('APP_PAGE_CONTRACTS_OK')

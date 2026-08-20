@@ -8,6 +8,7 @@ import socketserver
 import time
 from pathlib import Path
 
+from PIL import Image
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -119,6 +120,19 @@ def capture_screenshots() -> None:
         server.server_close()
 
 
+def build_card_derivatives() -> None:
+    for gig in GIGS:
+        slug = gig["slug"]
+        source = ASSETS / f"{slug}-desktop-output.png"
+        target = ASSETS / f"{slug}-card.webp"
+        with Image.open(source) as image:
+            image = image.convert("RGB")
+            width = 720
+            height = round(image.height * width / image.width)
+            image.resize((width, height), Image.Resampling.LANCZOS).save(target, "WEBP", quality=80, method=6)
+        shutil.copy2(target, RUNTIME / target.name)
+
+
 def patch_gig_pages() -> None:
     for gig in GIGS:
         slug = gig["slug"]
@@ -196,14 +210,19 @@ def write_landing_page() -> None:
     cards = []
     for gig in GIGS:
         slug = gig["slug"]
+        with Image.open(ASSETS / f"{slug}-card.webp") as card_image:
+            card_width, card_height = card_image.size
         cards.append(f'''
         <article class="gig-card">
           <a class="screenshot-link" href="gigs/{slug}/">
-            <img src="assets/screenshots/gigs/{slug}-desktop-output.png" alt="Actual desktop screenshot of {gig['title']}" />
+            <picture>
+              <source srcset="assets/screenshots/gigs/{slug}-card.webp" type="image/webp" />
+              <img src="assets/screenshots/gigs/{slug}-desktop-output.png" alt="Actual desktop screenshot of {gig['title']}" loading="lazy" decoding="async" width="{card_width}" height="{card_height}" />
+            </picture>
           </a>
           <div class="gig-card-body">
             <p class="eyebrow">{gig['eyebrow']}</p>
-            <h3>{gig['title']}</h3>
+            <h2>{gig['title']}</h2>
             <p>{gig['description']}</p>
             <div class="card-actions">
               <a class="cta" href="gigs/{slug}/">Open working preview</a>
@@ -217,7 +236,9 @@ def write_landing_page() -> None:
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Try three working TWE calculators and scorecards, then review the matching downloadable Gumroad products or request a scoped custom version." />
   <title>Gig Factory | Live Mini-Site Demos</title>
+  <link rel="icon" href="assets/twe-tools-favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -297,7 +318,7 @@ def write_landing_page() -> None:
           padding: 1.25rem;
         }
 
-        .gig-card h3 {
+        .gig-card h2 {
           margin: 0.25rem 0 0.75rem;
           font-size: clamp(1.35rem, 2vw, 1.8rem);
         }
@@ -337,6 +358,7 @@ def verify_local() -> None:
 def main() -> None:
     copy_gig_pages()
     capture_screenshots()
+    build_card_derivatives()
     write_landing_page()
     verify_local()
     print("published-gig-static-assets-ready", LANDING)
