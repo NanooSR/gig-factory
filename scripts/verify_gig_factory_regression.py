@@ -49,6 +49,7 @@ def test_lead(page, base):
     expect(page.locator('#new-clients').inner_text() == '2.11', 'lead new clients mismatch')
     expect('$1,111.97' in page.locator('#monthly-profit').inner_text(), 'lead gross profit mismatch')
     href = page.locator('#cta').get_attribute('href') or ''
+    expect(page.locator('#cta').inner_text() == 'Preview results email', 'lead preview CTA label drifted')
     decoded = href.replace('%20', ' ')
     for token in ['Average revenue', 'Gross margin', 'Monthly ad spend', 'Break-even clients', 'Additional customer value']:
         expect(token.replace(' ', '%20') in href or token in decoded, f'lead email missing {token}')
@@ -73,6 +74,7 @@ def test_quote(page, base):
     page.click('#calculate')
     expect(page.locator('#breakdown:not(.hidden)').count() == 1, 'quote breakdown should show')
     href = page.locator('#cta').get_attribute('href') or ''
+    expect(page.locator('#cta').inner_text() == 'Preview estimate email', 'quote preview CTA label drifted')
     for token in ['Ada%20Buyer', 'N1R%201A1', '2%20technicians', 'Priority', 'materials', 'planning%20allowance']:
         expect(token.lower() in href.lower(), f'quote email missing {token}')
     expect('2–4 business days' in page.locator('#eta').inner_text(), 'quote urgency window mismatch')
@@ -99,6 +101,7 @@ def test_scorecard(page, base):
     expect(page.locator('#score-output:not(.hidden)').count() == 1, 'scorecard result should show after click')
     expect('Readiness band' in page.locator('body').inner_text(), 'readiness band label missing')
     href = page.locator('#cta').get_attribute('href') or ''
+    expect(page.locator('#cta').inner_text() == 'Preview scorecard email', 'scorecard preview CTA label drifted')
     for token in ['Ada%20Studio', 'Criterion%20scores', 'Readiness%20band']:
         expect(token in href, f'scorecard email missing {token}')
     page.click('#reset-sample')
@@ -115,7 +118,16 @@ def test_routes(page, base):
         expect('hello@example.com' not in lower, f'{route} placeholder email visible')
         if route != '/':
             expect('what a buyer receives' in lower, f'{route} buyer deliverables missing')
-            expect(page.locator('.live-preview-gallery img').count() == 2, f'{route} screenshot gallery missing')
+            expect(page.locator('.live-preview-gallery').count() == 0, f'{route} pre-form gallery should be removed')
+            expect(page.locator('a.purchase-cta').count() == 1, f'{route} Gumroad purchase CTA missing')
+            sections = page.locator('main section, main.content-grid section')
+            expect(sections.count() >= 3, f'{route} expected form/result/readiness sections')
+            expect(sections.first.locator('h2').inner_text() == 'Try the interactive tool', f'{route} interactive tool must be first')
+            action_sizes = page.locator('button, a.cta, a.cta-button').evaluate_all(
+                "els => els.map(e => { const r=e.getBoundingClientRect(); return [e.textContent.trim(), r.width, r.height]; }).filter(row => row[1] > 0 && row[2] > 0)"
+            )
+            undersized = [row for row in action_sizes if row[1] < 44 or row[2] < 44]
+            expect(not undersized, f'{route} undersized action targets: {undersized}')
 
 
 def main():

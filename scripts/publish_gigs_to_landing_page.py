@@ -326,9 +326,8 @@ def verify_local() -> None:
             for gig in GIGS:
                 slug = gig["slug"]
                 page.goto(f"{base}/gigs/{slug}/", wait_until="networkidle")
-                assert page.locator(".live-preview-gallery img").count() == 2
-                dims = page.locator(".live-preview-gallery img").evaluate_all("imgs => imgs.map(img => [img.naturalWidth, img.naturalHeight])")
-                assert all(w > 300 and h > 300 for w, h in dims), (slug, dims)
+                assert page.locator(".live-preview-gallery").count() == 0
+                assert page.locator("a.purchase-cta").count() == 1
             browser.close()
     finally:
         server.shutdown()
@@ -338,7 +337,6 @@ def verify_local() -> None:
 def main() -> None:
     copy_gig_pages()
     capture_screenshots()
-    patch_gig_pages()
     write_landing_page()
     verify_local()
     print("published-gig-static-assets-ready", LANDING)

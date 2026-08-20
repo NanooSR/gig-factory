@@ -147,11 +147,13 @@ function run() {
     'Assumptions used:',
     ...scenarioLines(scenario),
     '',
+    `Preferred follow-up CTA: ${ctaText}`,
+    '',
     'Scenario estimate only. Confirm lead quality, conversion timing, revenue, margin, retention, attribution, ad spend, and other costs before making a budget decision.'
   ].join('\n');
 
   if (isUsablePreviewEmail(brandEmail)) {
-    cta.textContent = ctaText;
+    cta.textContent = 'Preview results email';
     cta.href = `mailto:${encodeURIComponent(brandEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   } else {
     cta.textContent = 'Enter a real email to preview results email';

@@ -143,11 +143,13 @@ function calculateTotal() {
     '',
     ...estimateLines(estimate),
     '',
+    `Preferred follow-up CTA: ${ctaTextEl.value.trim() || 'Get your custom estimate'}`,
+    '',
     'Generated with Custom Service Estimate & Intake Calculator preview. Planning estimate only; not a binding quote. Final scope, taxes, permits, travel, materials, availability, and contract terms must be confirmed by the service provider.'
   ].join('\n');
   if (isUsablePreviewEmail(brandEmail)) {
     ctaEl.href = `mailto:${encodeURIComponent(brandEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    ctaEl.textContent = ctaTextEl.value.trim() || 'Preview estimate email';
+    ctaEl.textContent = 'Preview estimate email';
   } else {
     ctaEl.removeAttribute('href');
     ctaEl.textContent = 'Enter a real email to preview estimate email';
