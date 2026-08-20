@@ -6,7 +6,7 @@ import urllib.request
 
 BASE = 'https://gig-factory-navy.vercel.app'
 ROOT = Path(__file__).resolve().parents[1]
-OUTDIR = ROOT / 'runtime' / 'live_verification_20260721_cfff642'
+OUTDIR = ROOT / 'runtime' / 'live_verification_20260820_906d2e5'
 OUTDIR.mkdir(parents=True, exist_ok=True)
 ROUTES = [
     '/',
@@ -34,7 +34,7 @@ def expect(condition, message):
 
 
 def fetch_head(path):
-    req = urllib.request.Request(BASE + path + '?live_check=cfff642', method='GET', headers={'User-Agent': 'HermesLiveGigVerifier/1.0'})
+    req = urllib.request.Request(BASE + path + '?live_check=906d2e5', method='GET', headers={'User-Agent': 'HermesLiveGigVerifier/1.0'})
     with urllib.request.urlopen(req, timeout=30) as r:
         body = r.read()
         return {'url': BASE + path, 'status': r.status, 'content_type': r.headers.get('content-type',''), 'bytes': len(body), 'text_head': body[:1000].decode('utf-8', 'ignore')}
@@ -48,11 +48,14 @@ def check_layout(page, label):
 
 
 def test_lead(page):
-    page.goto(BASE + '/gigs/lead-value-roi-calculator/?live_check=cfff642', wait_until='networkidle')
+    page.goto(BASE + '/gigs/lead-value-roi-calculator/?live_check=906d2e5', wait_until='networkidle')
     page.screenshot(path=str(OUTDIR / 'lead-live.png'), full_page=True)
     page.click('#calculate')
     expect(page.locator('#results:not(.hidden)').count() == 1, 'lead valid results hidden')
     href = unquote(page.locator('#cta').get_attribute('href') or '')
+    expect(page.locator('#cta').inner_text() == 'Preview results email', 'lead preview CTA label missing')
+    expect(page.locator('.seller-cta').inner_text() == 'Request a customized version', 'lead seller CTA label missing')
+    expect(page.locator('.purchase-cta').get_attribute('href') == 'https://nanoojr.gumroad.com/l/lfxro', 'lead purchase CTA mismatch')
     for token in ['Average revenue', 'Gross margin', 'Monthly ad spend', 'Break-even clients', 'Additional customer value']:
         expect(token in href, f'lead mailto missing {token}')
     page.fill('#qualification-rate', '150')
@@ -66,7 +69,7 @@ def test_lead(page):
 
 
 def test_quote(page):
-    page.goto(BASE + '/gigs/local-service-quote-calculator/?live_check=cfff642', wait_until='networkidle')
+    page.goto(BASE + '/gigs/local-service-quote-calculator/?live_check=906d2e5', wait_until='networkidle')
     page.screenshot(path=str(OUTDIR / 'quote-live.png'), full_page=True)
     page.fill('#customer-name', 'Ada Buyer')
     page.fill('#customer-contact', 'ada@example.ca')
@@ -83,7 +86,9 @@ def test_quote(page):
         expect(token in href, f'quote mailto missing {token}')
     body = page.locator('body').inner_text().lower()
     expect('pricing configuration transparency' in body, 'quote transparency block missing')
-    expect('get your custom estimate' in body, 'quote estimate CTA label missing')
+    expect(page.locator('#cta').inner_text() == 'Preview estimate email', 'quote preview CTA label missing')
+    expect(page.locator('.seller-cta').inner_text() == 'Request a customized version', 'quote seller CTA label missing')
+    expect(page.locator('.purchase-cta').get_attribute('href') == 'https://nanoojr.gumroad.com/l/bfqgb', 'quote purchase CTA mismatch')
     expect('get your custom quote' not in body, 'quote stale custom quote CTA present')
     expect('tax/contingency' not in body, 'quote stale tax/contingency text present')
     page.fill('#hours', '0')
@@ -94,7 +99,7 @@ def test_quote(page):
 
 
 def test_scorecard(page):
-    page.goto(BASE + '/gigs/website-audit-scorecard/?live_check=cfff642', wait_until='networkidle')
+    page.goto(BASE + '/gigs/website-audit-scorecard/?live_check=906d2e5', wait_until='networkidle')
     page.screenshot(path=str(OUTDIR / 'scorecard-live.png'), full_page=True)
     expect(page.locator('#score-output.hidden').count() == 1, 'scorecard should start hidden')
     expect('No score has been assigned yet.' in page.locator('#score-text').inner_text(), 'scorecard initial copy missing')
@@ -105,6 +110,9 @@ def test_scorecard(page):
     page.click('#score-btn')
     expect(page.locator('#score-output:not(.hidden)').count() == 1, 'scorecard result missing')
     href = unquote(page.locator('#cta').get_attribute('href') or '')
+    expect(page.locator('#cta').inner_text() == 'Preview scorecard email', 'scorecard preview CTA label missing')
+    expect(page.locator('.seller-cta').inner_text() == 'Request a customized version', 'scorecard seller CTA label missing')
+    expect(page.locator('.purchase-cta').get_attribute('href') == 'https://nanoojr.gumroad.com/l/sapzeo', 'scorecard purchase CTA mismatch')
     for token in ['Ada Studio', 'Criterion scores', 'Readiness band']:
         expect(token in href, f'scorecard mailto missing {token}')
     page.click('#reset-sample')
@@ -112,7 +120,7 @@ def test_scorecard(page):
 
 
 def main():
-    report = {'base': BASE, 'expected_commit': '1302081a0b78170bba10072cfb50b32db048f0d7', 'http': [], 'assets': [], 'viewports': []}
+    report = {'base': BASE, 'expected_commit': '906d2e5120a20205d6cd67d0a3fdfe39ba57ae9e', 'http': [], 'assets': [], 'viewports': []}
     for route in ROUTES:
         got = fetch_head(route)
         expect(got['status'] == 200, f'{route}: HTTP {got["status"]}')
@@ -139,7 +147,7 @@ def main():
             page.on('pageerror', lambda exc: console_errors.append(str(exc)))
             page.on('requestfailed', lambda req: failed.append(req.url))
             for route in ROUTES:
-                page.goto(BASE + route + '?live_check=cfff642', wait_until='networkidle')
+                page.goto(BASE + route + '?live_check=906d2e5', wait_until='networkidle')
                 text = page.locator('body').inner_text()
                 for term in BAD_TERMS:
                     expect(term not in text, f'{label} {route}: stale term {term}')
@@ -149,7 +157,7 @@ def main():
             test_quote(page)
             test_scorecard(page)
             # Basic keyboard focus check on homepage and zoom-ish layout check.
-            page.goto(BASE + '/?live_check=cfff642', wait_until='networkidle')
+            page.goto(BASE + '/?live_check=906d2e5', wait_until='networkidle')
             page.keyboard.press('Tab')
             active = page.evaluate('document.activeElement && (document.activeElement.href || document.activeElement.tagName)')
             expect(active, f'{label}: keyboard focus missing')
